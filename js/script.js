@@ -62,7 +62,6 @@ function panier(event){
 }
 function conso(nomConso,idConso,prixConso,listeConsos,listeAffichage,stock){
     //ajout du nom des consos dans la liste
-    
     if(listeConsos[idConso]==undefined){
         listeConsos[idConso]=1;
         listeAffichage[nomConso]={};
@@ -74,11 +73,11 @@ function conso(nomConso,idConso,prixConso,listeConsos,listeAffichage,stock){
         listeAffichage[nomConso]["quantité"]+=1;
         listeAffichage[nomConso]["prix"]+=prixConso;
     }
-    if (listeConsos[idConso]>stock[idConso]){
+    if (listeConsos[idConso]>stock[idConso]["quantité"]){
         alert("Stock insuffisant");
-        listeConsos[idConso]=stock[idConso];
-        listeAffichage[nomConso]["quantité"]=stock[idConso];
-        listeAffichage[nomConso]["prix"]=stock[idConso]*prixConso;
+        listeConsos[idConso]=stock[idConso]["quantité"];
+        listeAffichage[nomConso]["quantité"]=stock[idConso]["quantité"];
+        listeAffichage[nomConso]["prix"]=stock[idConso]["quantité"]*prixConso;
     }
     return listeConsos,listeAffichage;
 }
@@ -256,7 +255,7 @@ function calcul_stock(details){
             stock_restant[consos]["quantité"]=stock[consos]["quantité"]-consommations[consos]["quantité"];
             stock_restant[consos]["prix"]=stock_restant[consos]["quantité"]*stock[consos]["prix"];
         }
-        if(stock_restant[consos]<=0){
+        if(stock_restant[consos]["quantité"]<=0){
             //supprime la clé si le stock est vide
             delete stock_restant[consos];
         }
@@ -338,7 +337,7 @@ function graphique(data_day,nb_day=5){
         //check si le jour est dans la limite du nb_day
         if(label>date_jour){
             quantite.push(data_day[label]["quantité"]);
-            prix.push(data_day[label]["prix"]);
+            prix.push(data_day[label]["prix"]*0.8);
             day.push(label);
         }
 
