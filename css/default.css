@@ -67,7 +67,7 @@ h1{
 }
 
 
-.produit {
+.produit, .page {
   width: 100%;
   justify-content: space-around;
   padding-block: 30px;
@@ -272,10 +272,14 @@ img{
   flex-direction: row;
   padding: 20px;
 }
+.page{
+  height: 100%;
+  width: 80%;
+}
 #graphique{
-  width: 500px;
-  height: 500px;
+  width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f2d3b4;
 }
