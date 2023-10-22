@@ -265,5 +265,17 @@ img{
   filter: brightness(50%);
   cursor: not-allowed;
 }
-
-
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*PAGE CALCUL STOCK*/
+.resume{
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+#graphique{
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

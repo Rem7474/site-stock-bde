@@ -12,6 +12,7 @@ if(document.title=="Vente de Conso du BDE R&T"){
 //test si la page est "stock.html"
 if(document.title=="Calcul de stock du BDE R&T"){
     gestion_stock();
+    liste_deroulante();
     window.addEventListener("storage",gestion_stock);
 }
 if(document.title=="Liste des consos disponibles au BDE R&T"){
@@ -81,12 +82,12 @@ function conso(nomConso,idConso,prixConso,listeConsos,listeAffichage,stock){
     }
     return listeConsos,listeAffichage;
 }
-function affichage(data){
+function affichage(data,id="tableau"){
     //affiche des données dans le html
     //récupère la liste des clés du dictionnaire
     let keys=Object.keys(data);
     //supprime le tableau existant
-    let tableau=document.getElementById("tableau");
+    let tableau=document.getElementById(id);
     tableau.innerHTML="";
     let conso_total=0;
     let quantite_total=0;
@@ -248,7 +249,7 @@ function calcul_stock(details){
         if(consommations[consos]==undefined){
             stock_restant[consos]={};
             stock_restant[consos]["quantité"]=stock[consos]["quantité"];
-            stock_restant[consos]["prix"]=stock[consos]["prix"];
+            stock_restant[consos]["prix"]=stock[consos]["prix"]*stock[consos]["quantité"];
         }
         else{
             stock_restant[consos]={};
@@ -290,13 +291,19 @@ function updateproduit(event){
     document.getElementById("cost_conso").value=event.target.value;
 }
 
-function gestion_stock(){
+function gestion_stock(event){
     let stock=calcul_stock("all");
     conso_calcul=stock[0];
     stock_calcul=stock[1];
     conso_day=stock[2];
-    affichage(stock_calcul);
-    graphique(conso_day);
+    affichage(conso_calcul,"stock_vendu");
+    affichage(stock_calcul,"stock_restant");
+    //test si event.id == "nb_jour"
+    let nb_day=5;
+    if(event!=undefined && event.target.id=="nb_jour"){
+        nb_day=event.target.value;
+    }
+    graphique(conso_day,nb_day);
     let courses=localStorage.getItem("stock_courses")
     courses=JSON.parse(courses);
     let nb_consos=prix(courses,conso_calcul);
@@ -309,24 +316,40 @@ function gestion_stock(){
     affiche_prix(nb_consos);
 }
 //fonction pour calculer les ventes réalisées chaque jour et affiché les quantités vendues et le prix total, affichage avec un graphique
-function graphique(data_day){
+function graphique(data_day,nb_day=5){
     //reset le canvas
     document.getElementById("myChart").remove();
     let canvas=document.createElement("canvas");
     canvas.id="myChart";
     document.getElementById("graphique").appendChild(canvas);
     let labels=Object.keys(data_day);
+    //trie les labels par ordre décroissant
+    labels.sort().reverse();
     let quantite=[];
     let prix=[];
+    let day=[];
+    let date=new Date();
+    let jour=date.getDate()-nb_day;
+    let mois=date.getMonth()+1;
+    let annee=date.getFullYear();
+    let date_jour=jour+"/"+mois+"/"+annee;
+
     for(let label of labels){
-        quantite.push(data_day[label]["quantité"]);
-        prix.push(data_day[label]["prix"]*0.8);
+        //check si le jour est dans la limite du nb_day
+        if(label>date_jour){
+            quantite.push(data_day[label]["quantité"]);
+            prix.push(data_day[label]["prix"]);
+            day.push(label);
+        }
+
+        
+
     }
     let ctx = document.getElementById('myChart').getContext('2d');
     let myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: day,
             datasets: [{
                 label: 'Quantité',
                 data: quantite,
@@ -374,11 +397,22 @@ function prix(stock,consos){
     return [prix_stock,prix_conso,prix_restant];
 }
 function affiche_prix(data){
-    let conso_courses=data[0];
-    let conso_vendues=data[1];
-    let conso_restantes=data[2];
     let affichage=document.getElementById("prix");
-    affichage.innerHTML="Stock total : "+data[0]+"€<br>Conso vendues : "+data[1]+"€<br>Conso restantes : "+data[2]+"€";
+    affichage.innerHTML="Stock total : "+(data[0]*0.8).toFixed(2)+"€<br>Conso vendues : "+(data[1]*0.8).toFixed(2)+"€<br>Conso restantes : "+(data[2]*0.8).toFixed(2)+"€";
 
+}
+//fonction pour créer une liste déroulante avec le nombre de jour voulu dans l'affichage du graphique
+function liste_deroulante(){
+    let liste=document.getElementById("nb_jour");
+    //possibilité de choisir entre 1 et 30 jours
+    for(let i=1;i<=30;i++){
+        let option=document.createElement("option");
+        option.value=i;
+        option.innerHTML=i;
+        liste.appendChild(option);
+    }
+    //valeur par défaut : 5 jours
+    liste.value=5;
+    liste.addEventListener("change",gestion_stock);
 }
     
