@@ -1,6 +1,7 @@
 //test si la page est "index.html"
 let stock_calcul={};
 let conso_calcul={};
+let conso_day={};
 let dicoConso={};
 let dicoAffichage={};
 if(document.title=="Vente de Conso du BDE R&T"){
@@ -10,11 +11,8 @@ if(document.title=="Vente de Conso du BDE R&T"){
 }
 //test si la page est "stock.html"
 if(document.title=="Calcul de stock du BDE R&T"){
-    let result=calcul_stock("all");
-    conso_calcul=result[0];
-    stock_calcul=result[1];
-    affichage(stock_calcul);
-    //affichage(conso_calcul);
+    gestion_stock();
+    window.addEventListener("storage",gestion_stock);
 }
 if(document.title=="Liste des consos disponibles au BDE R&T"){
     listeconsodispo();
@@ -230,31 +228,48 @@ function calcul_stock(details){
     let stock_restant={};
     let stock=localStorage.getItem("stock_courses")
     stock=JSON.parse(stock);
+    let conso_by_day={};
     //récupère les données du local storage
     let keys=Object.keys(localStorage);    
     //stock actuel :
     console.log("stock actuel :")
     console.log(stock);
     //calcul des consommations
-    for(let i=0;i<keys.length;i++){
-        let key=keys[i];
+    for (let key of keys){
         if (key!="stock_courses"){
             let value=localStorage.getItem(key);
             value=JSON.parse(value);
             //récupère le dictionnaire des consos pour afficher les données
             for(let conso in value.consos){
-                if(consommations[conso]==undefined){
-                    consommations[conso]={};
-                    consommations[conso]["quantité"]=parseInt(value.consos[conso]);
+                let quantite=parseInt(value.consos[conso]);
+                let prix=parseInt(value.consos[conso])*stock[conso]["prix"];
+                if(conso_by_day[value.jour]==undefined){
+                    conso_by_day[value.jour]={};
+                    conso_by_day[value.jour]["quantité"]=quantite;
+                    conso_by_day[value.jour]["prix"]=prix;
                 }
                 else{
-                    consommations[conso]["quantité"]+=parseInt(value.consos[conso]);
+                    conso_by_day[value.jour]["quantité"]+=quantite;
+                    conso_by_day[value.jour]["prix"]+=prix;
+                }
+                if(consommations[conso]==undefined){
+                    consommations[conso]={};
+                    consommations[conso]["quantité"]=quantite;
+                    consommations[conso]["prix"]=prix;
+                }
+                else{
+                    consommations[conso]["quantité"]+=quantite;
+                    consommations[conso]["prix"]+=prix;
                 }
             }
         }
     }
+
+
     console.log("consommations :");
     console.log(consommations);
+    console.log("consommations by day :");
+    console.log(conso_by_day);
     
     for (let consos in stock){
         if(consommations[consos]==undefined){
@@ -284,9 +299,13 @@ function calcul_stock(details){
             console.log("stock restant");
             return stock_restant;
             break;
+        case "conso_by_day":
+            console.log("conso by day");
+            return conso_by_day;
+            break;
         case "all":
             console.log("all");
-            return [consommations,stock_restant];
+            return [consommations,stock_restant,conso_by_day];
             break;
         default:
             return stock_restant;
@@ -298,3 +317,57 @@ function updateproduit(event){
     document.getElementById("cost_conso").value=event.target.value;
 }
 
+function gestion_stock(){
+    let stock=calcul_stock("all");
+    conso_calcul=stock[0];
+    stock_calcul=stock[1];
+    conso_day=stock[2];
+    affichage(stock_calcul);
+    graphique(conso_day);
+    //affichage(conso_calcul);
+}
+//fonction pour calculer les ventes réalisées chaque jour et affiché les quantités vendues et le prix total, affichage avec un graphique
+function graphique(data_day){
+    let labels=Object.keys(data_day);
+    let quantite=[];
+    let prix=[];
+    for(let label of labels){
+        quantite.push(data_day[label]["quantité"]);
+        prix.push(data_day[label]["prix"]*0.8);
+    }
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Quantité',
+                data: quantite,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor:'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Prix',
+                data: prix,
+                backgroundColor: 'rgba(99, 255, 132, 0.2)',
+                borderColor:'rgba(99, 255, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            return value + '€';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+    
