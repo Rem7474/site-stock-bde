@@ -152,33 +152,6 @@ function save(listeConsos){
     check_stock();
 
 }
-function formulairestock(){
-    //ajout une formulaire pour ajouter le stock actuel
-    let formulaire=document.getElementById("formulaire");
-    formulaire.innerHTML="";
-    let titre=document.createElement("h2");
-    titre.innerHTML="Ajouter le stock actuel";
-    formulaire.appendChild(titre);
-    let label=document.createElement("label");
-    label.innerHTML="Nom de la conso";
-    formulaire.appendChild(label);
-    let input=document.createElement("input");
-    input.type="text";
-    input.id="nom";
-    formulaire.appendChild(input);
-    let label2=document.createElement("label");
-    label2.innerHTML="Quantité";
-    formulaire.appendChild(label2);
-    let input2=document.createElement("input");
-    input2.type="number";
-    input2.id="quantite";
-    formulaire.appendChild(input2);
-    let bouton=document.createElement("button");
-    bouton.innerHTML="Ajouter";
-    formulaire.appendChild(bouton);
-    bouton.addEventListener("click",ajoutstock);
-}
-
 function listeconsodispo(){
     //récupère les données du local storage
     //clé pour acceder au stock actuel : "stock_courses"
@@ -375,4 +348,5 @@ function graphique(data_day){
         }
     });
 }
+//rajout du calcul entre le total des ventes et le prix total des consos
     
