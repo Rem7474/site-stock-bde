@@ -139,7 +139,7 @@ function save(listeConsos){
     document.getElementById('checkout').classList.remove('anim1');
     let date=new Date();
     let heure=date.getHours()+":"+date.getMinutes();
-    let jour=date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+    let jour=date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
     let consos={};
     consos["jour"]=jour;
     consos["heure"]=heure;
@@ -328,6 +328,11 @@ function gestion_stock(){
 }
 //fonction pour calculer les ventes réalisées chaque jour et affiché les quantités vendues et le prix total, affichage avec un graphique
 function graphique(data_day){
+    //reset le canvas
+    document.getElementById("myChart").remove();
+    let canvas=document.createElement("canvas");
+    canvas.id="myChart";
+    document.getElementById("graphique").appendChild(canvas);
     let labels=Object.keys(data_day);
     let quantite=[];
     let prix=[];
