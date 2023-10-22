@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./js/script.js" defer></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/default.css">
+    <title>Liste des consos disponibles au BDE R&T</title>
+</head>
+<body>
+<h1>Liste des consos disponibles au BDE R&T</h1>
+<!--Formulaire pour ajoute toutes les consos qui sont disponible au BDE R&T-->
+<div class="produit" id="produit">
+    <div id="boissons_1_conso">
+        <h2>Boissons à 1 conso</h2>
+        <div class="buttons">
+            <button name="Coca-Cola" type="button" id="coca" value="1" class="clickage conso coca">Coca-Cola</button>
+            <button name="Coca-Cola Cherry" type="button" id="coca_cherry" value="1" class="clickage conso cherry">Coca-Cola Cherry</button>
+            <button name="Lipton Ice-Tea" type="button" id="Lipton" value="1" class="clickage conso icetea">Lipton</button>
+            <button name="FuzeTea" type="button" id="Fuzetea" value="1" class="clickage conso fuze">FuzeTea</button>
+            <button name="Schweppes Agrumes" type="button" id="schweppes" value="1" class="clickage conso schweppes">Schweppes Agrumes</button>
+            <button name="Cacolac" type="button" id="cacolac" value="1" class="clickage conso cacolac">Cacolac</button>
+        </div>
+    </div>
+    <div id="boisson_2_conso">
+        <h2>Boissons à 2 conso</h2>
+        <div class="buttons">
+            <button name="RedBull" type="button" id="redbull" value="2" class="clickage conso redbull">RedBull</button>
+            <button name="Monster" type="button" id="monster" value="2" class="clickage conso monster">Monster</button>
+            <button name="Monster Mango-Loco" type="button" id="mangoloco" value="2" class="clickage conso mangoloco">Monster Mango Loco</button>
+        </div>
+    </div>
+    <div id="snacks">
+        <h2>Snacks à 1 conso</h2>
+        <div class="buttons">
+            <button name="Lion" type="button" id="lion" value="1" class="clickage conso lion">Lion</button>
+            <button name="Lion Peanut" type="button" id="lion_peanut" value="1" class="clickage conso lionp">Lion Peanut</button>
+            <button name="M&M's" type="button" id="Mms" value="1" class="clickage conso mms">M&M's</button>
+            <button name="Kinder Bueno" type="button" id="kinder_bueno" value="1" class="clickage conso bueno">Kinder Bueno</button>
+            <button name="Kinder Bueno White" type="button" id="kinder_bueno_white" value="1" class="clickage conso buenow">Kinder Bueno White</button>
+            <button name="Crunch" type="button" id="crunch" value="1" class="clickage conso crunch">Crunch</button>
+            <button name="Kit-Kat" type="button" id="kitkat" value="1" class="clickage conso kitkat">Kit-Kat</button>
+            <button name="Kit-Kat Chunky" type="button" id="kitkat_chunky" value="1" class="clickage conso kitkatchunky">Kit-Kat Chunky</button>
+        </div>
+    </div>
+</div>
+<form id="form_stock">
+    <div>
+    <label for="id_conso">ID :</label>
+    <input type="text" name="id_conso" id="id_conso" placeholder="" disabled>
+    <label for="cost_conso">prix :</label>
+    <input type="number" name="cost_conso" id="cost_conso" placeholder="" disabled>
+    <label for="stock">Stock de la conso</label>
+    <input type="number" name="stock" id="stock" required>
+    <button type="submit" id="add">Ajouter la consommation</button>
+</div>
+</form>
+<!--Affichage de toutes les consos qui sont disponible au BDE R&T-->
+<div id="tableau"></div>
+</body>
+</html>

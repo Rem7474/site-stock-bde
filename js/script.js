@@ -1,0 +1,300 @@
+//test si la page est "index.html"
+let stock_calcul={};
+let conso_calcul={};
+let dicoConso={};
+let dicoAffichage={};
+if(document.title=="Vente de Conso du BDE R&T"){
+    //refrech si local storage update
+    window.addEventListener("storage",check_stock);
+    check_stock();
+}
+//test si la page est "stock.html"
+if(document.title=="Calcul de stock du BDE R&T"){
+    let result=calcul_stock("all");
+    conso_calcul=result[0];
+    stock_calcul=result[1];
+    affichage(stock_calcul);
+    //affichage(conso_calcul);
+}
+if(document.title=="Liste des consos disponibles au BDE R&T"){
+    listeconsodispo();
+    let boutons=document.getElementsByClassName("conso");
+    for (let bouton of boutons){
+        bouton.addEventListener("click",updateproduit);
+    }
+    document.getElementById("form_stock").addEventListener("submit",ajoutstock);
+}
+function check_stock(){
+    let boutons=document.getElementsByClassName("conso");
+    //bouton de validation du panier
+    document.getElementById("save").addEventListener("click",panier);
+    //bouton pour ajouter au panier
+    let stock=Object.keys(calcul_stock());
+    for (let bouton of boutons){
+        bouton.addEventListener("click",panier);
+        if (stock.indexOf(bouton.id) < 0){
+            //add attribute disabled
+            bouton.setAttribute("disabled","disabled");
+        }
+        else{
+            //remove attribute disabled
+            bouton.removeAttribute("disabled");
+        }
+    }
+}
+function panier(event){
+    if (event.target.id=="save"){
+        //appel de la fonction save pour enregistrer les données
+        save(dicoConso);
+        //reset des variables
+        dicoConso={};
+        dicoAffichage={};
+    }
+    else{
+    //appel de la fonction conso pour créer la liste
+    console.log(event);
+    let nom=event.target.name;
+    let id=event.target.id;
+    let prix=parseInt(event.target.value);
+    let stock=calcul_stock();
+    dicoConso,dicoAffichage=conso(nom,id,prix,dicoConso,dicoAffichage,stock);
+    affichage(dicoAffichage);
+    }
+}
+function conso(nomConso,idConso,prixConso,listeConsos,listeAffichage,stock){
+    //ajout du nom des consos dans la liste
+    
+    if(listeConsos[idConso]==undefined){
+        listeConsos[idConso]=1;
+        listeAffichage[nomConso]={};
+        listeAffichage[nomConso]["quantité"]=1;
+        listeAffichage[nomConso]["prix"]=prixConso;
+    }
+    else{
+        listeConsos[idConso]+=1;
+        listeAffichage[nomConso]["quantité"]+=1;
+        listeAffichage[nomConso]["prix"]+=prixConso;
+    }
+    if (listeConsos[idConso]>stock[idConso]){
+        alert("Stock insuffisant");
+        listeConsos[idConso]=stock[idConso];
+        listeAffichage[nomConso]["quantité"]=stock[idConso];
+        listeAffichage[nomConso]["prix"]=stock[idConso]*prixConso;
+    }
+    return listeConsos,listeAffichage;
+}
+function affichage(data){
+    //affiche des données dans le html
+    //récupère la liste des clés du dictionnaire
+    let keys=Object.keys(data);
+    //supprime le tableau existant
+    let tableau=document.getElementById("tableau");
+    tableau.innerHTML="";
+    let conso_total=0;
+    let quantite_total=0;
+    let ligne=document.createElement("tr");
+    let cellule1=document.createElement("td");
+    let cellule2=document.createElement("td");
+    let cellule3=document.createElement("td");
+    cellule1.innerHTML="Nom";
+    cellule2.innerHTML="Quantité";
+    cellule3.innerHTML="Prix";
+    ligne.appendChild(cellule1);
+    ligne.appendChild(cellule2);
+    ligne.appendChild(cellule3);
+    tableau.appendChild(ligne);
+    let quantite;
+    let prix;
+    console.log(data);
+    for (let nomConso in data){
+        quantite=data[nomConso]["quantité"];
+        prix=data[nomConso]["prix"];
+        ligne=document.createElement("tr");
+        cellule1=document.createElement("td");
+        cellule2=document.createElement("td");
+        cellule3=document.createElement("td");
+        cellule1.innerHTML=nomConso;
+        cellule2.innerHTML=quantite;
+        cellule3.innerHTML=prix;
+        conso_total+=prix;
+        quantite_total+=quantite;
+        ligne.appendChild(cellule1);
+        ligne.appendChild(cellule2);
+        ligne.appendChild(cellule3);
+        tableau.appendChild(ligne);
+    }
+    ligne=document.createElement("tr");
+    cellule1=document.createElement("td");
+    cellule2=document.createElement("td");
+    cellule3=document.createElement("td");
+    cellule1.innerHTML="Total";
+    cellule2.innerHTML=quantite_total;
+    cellule3.innerHTML=(conso_total*0.8).toFixed(2)+"€" + " ("+conso_total+")";
+    ligne.appendChild(cellule1);
+    ligne.appendChild(cellule2);
+    ligne.appendChild(cellule3);
+    tableau.appendChild(ligne);
+
+}
+function save(listeConsos){
+    //enregistrer les données dans le local storage en format JSON en précisant l'heure et la date
+    document.getElementById('checkout').classList.remove('anim1');
+    let date=new Date();
+    let heure=date.getHours()+":"+date.getMinutes();
+    let jour=date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+    let consos={};
+    consos["jour"]=jour;
+    consos["heure"]=heure;
+    consos["consos"]=listeConsos;
+    //ajout des données dans le local storage avec un id unique
+    let id=Date.now();
+    localStorage.setItem(id,JSON.stringify(consos));
+    affichage(listeConsos);
+    stock_calcul=calcul_stock();
+    check_stock();
+
+}
+function formulairestock(){
+    //ajout une formulaire pour ajouter le stock actuel
+    let formulaire=document.getElementById("formulaire");
+    formulaire.innerHTML="";
+    let titre=document.createElement("h2");
+    titre.innerHTML="Ajouter le stock actuel";
+    formulaire.appendChild(titre);
+    let label=document.createElement("label");
+    label.innerHTML="Nom de la conso";
+    formulaire.appendChild(label);
+    let input=document.createElement("input");
+    input.type="text";
+    input.id="nom";
+    formulaire.appendChild(input);
+    let label2=document.createElement("label");
+    label2.innerHTML="Quantité";
+    formulaire.appendChild(label2);
+    let input2=document.createElement("input");
+    input2.type="number";
+    input2.id="quantite";
+    formulaire.appendChild(input2);
+    let bouton=document.createElement("button");
+    bouton.innerHTML="Ajouter";
+    formulaire.appendChild(bouton);
+    bouton.addEventListener("click",ajoutstock);
+}
+
+function listeconsodispo(){
+    //récupère les données du local storage
+    //clé pour acceder au stock actuel : "stock_courses"
+    //test si le stock existe, s'il n'existe pas, on fait rien
+    let stock=localStorage.getItem("stock_courses");
+    if(stock==null){
+        return;
+    }
+    stock=JSON.parse(stock);
+    affichage(stock);
+
+}
+function ajoutstock(event){
+    event.preventDefault();
+    //reset le formulaire
+    let formulaire=document.getElementById("form_stock");
+    console.log(event);
+    console.log(event.target[0].value);
+    console.log(event.target[1].value);
+    console.log(event.target[2].value);
+    //ajout le stock actuel dans le local storage
+    let nom=event.target[0].value;
+    let prix=parseInt(event.target[1].value);
+    let quantite=parseInt(event.target[2].value);
+    let stock=localStorage.getItem("stock_courses");
+    stock=JSON.parse(stock);
+    if(stock==null){
+        stock={};
+    }
+    //test si la conso existe déjà
+    if(stock[nom]==undefined){
+        stock[nom]={};
+        stock[nom]["quantité"]=quantite;
+        stock[nom]["prix"]=prix;
+    }
+    else{
+        stock[nom]["quantité"]+=quantite;
+        stock[nom]["prix"]=prix;
+    }
+    localStorage.setItem("stock_courses",JSON.stringify(stock));
+    listeconsodispo();
+    formulaire.reset();
+}
+
+function calcul_stock(details){
+    let consommations={};
+    let stock_restant={};
+    let stock=localStorage.getItem("stock_courses")
+    stock=JSON.parse(stock);
+    //récupère les données du local storage
+    let keys=Object.keys(localStorage);    
+    //stock actuel :
+    console.log("stock actuel :")
+    console.log(stock);
+    //calcul des consommations
+    for(let i=0;i<keys.length;i++){
+        let key=keys[i];
+        if (key!="stock_courses"){
+            let value=localStorage.getItem(key);
+            value=JSON.parse(value);
+            //récupère le dictionnaire des consos pour afficher les données
+            for(let conso in value.consos){
+                if(consommations[conso]==undefined){
+                    consommations[conso]={};
+                    consommations[conso]["quantité"]=parseInt(value.consos[conso]);
+                }
+                else{
+                    consommations[conso]["quantité"]+=parseInt(value.consos[conso]);
+                }
+            }
+        }
+    }
+    console.log("consommations :");
+    console.log(consommations);
+    
+    for (let consos in stock){
+        if(consommations[consos]==undefined){
+            stock_restant[consos]={};
+            stock_restant[consos]["quantité"]=stock[consos]["quantité"];
+            stock_restant[consos]["prix"]=stock[consos]["prix"];
+        }
+        else{
+            stock_restant[consos]={};
+            stock_restant[consos]["quantité"]=stock[consos]["quantité"]-consommations[consos]["quantité"];
+            stock_restant[consos]["prix"]=stock_restant[consos]["quantité"]*stock[consos]["prix"];
+        }
+        if(stock_restant[consos]<=0){
+            //supprime la clé si le stock est vide
+            delete stock_restant[consos];
+        }
+
+    }
+    console.log("stock restant :");
+    console.log(stock_restant);
+    switch(details){
+        case "consommations":
+            console.log("consommations");
+            return consommations;
+            break;
+        case "stock_restant":
+            console.log("stock restant");
+            return stock_restant;
+            break;
+        case "all":
+            console.log("all");
+            return [consommations,stock_restant];
+            break;
+        default:
+            return stock_restant;
+            break;
+    }
+}
+function updateproduit(event){
+    document.getElementById("id_conso").value=event.target.id;
+    document.getElementById("cost_conso").value=event.target.value;
+}
+
