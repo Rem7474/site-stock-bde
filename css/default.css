@@ -168,7 +168,7 @@ tr:last-of-type{
   right: 20px;
 }
 
-.table tr, .addconso label, .formulaire input{
+.table tr, .formulaire label, .formulaire input{
   color : white;
   font-size: larger;
 }
@@ -290,14 +290,18 @@ img{
 }
 .formulaire input{
   width: 200px;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
   text-align: center;
   background-color: #f2d3b4;
   align-self: center;
 }
+.formulaire label{
+  text-align: center;
+}
 .formulaire input:disabled{
   filter: brightness(50%);
+  color :black;
 }
 .select_flex{
   display: flex;
