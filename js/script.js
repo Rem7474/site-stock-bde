@@ -297,7 +297,16 @@ function gestion_stock(){
     conso_day=stock[2];
     affichage(stock_calcul);
     graphique(conso_day);
-    //affichage(conso_calcul);
+    let courses=localStorage.getItem("stock_courses")
+    courses=JSON.parse(courses);
+    let nb_consos=prix(courses,conso_calcul);
+    console.log("nombre total de conso des courses :");
+    console.log(nb_consos[0]);
+    console.log("nombre de conso vendues :");
+    console.log(nb_consos[1]);
+    console.log("nombre de conso restantes :");
+    console.log(nb_consos[2]);
+    affiche_prix(nb_consos);
 }
 //fonction pour calculer les ventes réalisées chaque jour et affiché les quantités vendues et le prix total, affichage avec un graphique
 function graphique(data_day){
@@ -349,4 +358,27 @@ function graphique(data_day){
     });
 }
 //rajout du calcul entre le total des ventes et le prix total des consos
+function prix(stock,consos){
+    //calcul du prix total du stock
+    let prix_stock=0;
+    for(let conso in stock){
+        prix_stock+=stock[conso]["prix"]*stock[conso]["quantité"];
+    }
+    //calcul du prix total des consos
+    let prix_conso=0;
+    for(let conso in consos){
+        prix_conso+=consos[conso]["prix"];
+    }
+    //calcul du prix total des consos restantes
+    let prix_restant=prix_stock-prix_conso;
+    return [prix_stock,prix_conso,prix_restant];
+}
+function affiche_prix(data){
+    let conso_courses=data[0];
+    let conso_vendues=data[1];
+    let conso_restantes=data[2];
+    let affichage=document.getElementById("prix");
+    affichage.innerHTML="Stock total : "+data[0]+"€<br>Conso vendues : "+data[1]+"€<br>Conso restantes : "+data[2]+"€";
+
+}
     
