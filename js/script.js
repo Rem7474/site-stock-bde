@@ -425,4 +425,53 @@ function liste_deroulante(){
     liste.value=5;
     liste.addEventListener("change",gestion_stock);
 }
-    
+//export local storage en csv
+function export_csv(){
+    let csv="";
+    let keys=Object.keys(localStorage);
+    for(let key of keys){
+        if(key!="stock_courses"){
+            let value=localStorage.getItem(key);
+            value=JSON.parse(value);
+            csv+=value.jour+","+value.heure+",";
+            for(let conso in value.consos){
+                csv+=conso+","+value.consos[conso]+",";
+            }
+            csv+="\n";
+        }
+    }
+    let a=document.createElement("a");
+    a.href="data:text/csv;charset=utf-8,"+encodeURI(csv);
+    a.target="_blank";
+    a.download="export.csv";
+    document.body.appendChild(a);
+    a.click();
+}
+//import csv en local storage
+function import_csv(){
+    let input=document.createElement("input");
+    input.type="file";
+    input.accept=".csv";
+    input.addEventListener("change",function(event){
+        let file=event.target.files[0];
+        let reader=new FileReader();
+        reader.readAsText(file);
+        reader.onload=function(){
+            let data=reader.result;
+            data=data.split("\n");
+            for(let ligne of data){
+                ligne=ligne.split(",");
+                let jour=ligne[0];
+                let heure=ligne[1];
+                let consos={};
+                for(let i=2;i<ligne.length;i+=2){
+                    consos[ligne[i]]=ligne[i+1];
+                }
+                let id=Date.now();
+                localStorage.setItem(id,JSON.stringify({"jour":jour,"heure":heure,"consos":consos}));
+            }
+        }
+    });
+    document.body.appendChild(input);
+    input.click();
+}
