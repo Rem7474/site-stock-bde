@@ -172,10 +172,12 @@ function ajoutstock(event){
     console.log(event.target[0].value);
     console.log(event.target[1].value);
     console.log(event.target[2].value);
+    console.log(event.target[3].value);
     //ajout le stock actuel dans le local storage
     let nom=event.target[0].value;
     let prix=parseFloat(event.target[1].value);
-    let quantite=parseInt(event.target[2].value);
+    let prix_achat=parseFloat(event.target[2].value);
+    let quantite=parseInt(event.target[3].value);
     let stock=localStorage.getItem("stock_courses");
     stock=JSON.parse(stock);
     if(stock==null){
@@ -186,10 +188,12 @@ function ajoutstock(event){
         stock[nom]={};
         stock[nom]["quantité"]=quantite;
         stock[nom]["prix"]=prix;
+        stock[nom]["prix_achat"]=prix_achat;
     }
     else{
         stock[nom]["quantité"]+=quantite;
         stock[nom]["prix"]=prix;
+        stock[nom]["prix_achat"]=prix_achat;
     }
     localStorage.setItem("stock_courses",JSON.stringify(stock));
     listeconsodispo();
