@@ -266,13 +266,16 @@ img{
   background-image: url("../img/chunky.png");
 }
 .snickers{
-  background-image: url("../img/snickers.webp");
+  background-image: url("../img/snickers.jpg");
 }
 .opcf{
   background-image: url("../img/opcf.jpg");
 }
 .madeleine{
   background-image: url("../img/marbres.png");
+}
+.maid{
+  background-image: url("../img/maid.jpg");
 }
 .produit button:disabled{
   filter: brightness(50%);
