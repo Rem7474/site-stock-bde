@@ -54,7 +54,7 @@ function panier(event){
     console.log(event);
     let nom=event.target.name;
     let id=event.target.id;
-    let prix=parseInt(event.target.value);
+    let prix=parseFloat(event.target.value);
     let stock=calcul_stock();
     dicoConso,dicoAffichage=conso(nom,id,prix,dicoConso,dicoAffichage,stock);
     affichage(dicoAffichage);
@@ -174,7 +174,7 @@ function ajoutstock(event){
     console.log(event.target[2].value);
     //ajout le stock actuel dans le local storage
     let nom=event.target[0].value;
-    let prix=parseInt(event.target[1].value);
+    let prix=parseFloat(event.target[1].value);
     let quantite=parseInt(event.target[2].value);
     let stock=localStorage.getItem("stock_courses");
     stock=JSON.parse(stock);
@@ -215,7 +215,7 @@ function calcul_stock(details){
             //récupère le dictionnaire des consos pour afficher les données
             for(let conso in value.consos){
                 let quantite=parseInt(value.consos[conso]);
-                let prix=parseInt(value.consos[conso])*stock[conso]["prix"];
+                let prix=parseFloat(value.consos[conso])*stock[conso]["prix"];
                 if(conso_by_day[value.jour]==undefined){
                     conso_by_day[value.jour]={};
                     conso_by_day[value.jour]["quantité"]=quantite;
