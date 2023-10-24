@@ -433,9 +433,18 @@ function export_csv(){
         if(key!="stock_courses"){
             let value=localStorage.getItem(key);
             value=JSON.parse(value);
-            csv+=value.jour+","+value.heure+",";
+            csv+=value.jour+";"+value.heure+";";
             for(let conso in value.consos){
-                csv+=conso+","+value.consos[conso]+",";
+                csv+=conso+";"+value.consos[conso]+";";
+            }
+            csv+="\n";
+        }
+        else{
+            let value=localStorage.getItem(key);
+            value=JSON.parse(value);
+            csv+="stock_courses; ;";
+            for(let conso in value){
+                csv+=conso+";"+value[conso]["quantité"]+";"+value[conso]["prix"]+";"+value[conso]["prix_achat"]+";";
             }
             csv+="\n";
         }
