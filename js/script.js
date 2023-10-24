@@ -387,22 +387,29 @@ function graphique(data_day,nb_day=5){
 function prix(stock,consos){
     //calcul du prix total du stock
     let prix_stock=0;
+    let prix_achat=0;
     for(let conso in stock){
         prix_stock+=stock[conso]["prix"]*stock[conso]["quantité"];
+        prix_achat+=stock[conso]["prix_achat"]*stock[conso]["quantité"];
     }
     //calcul du prix total des consos
     let prix_conso=0;
+    let prix_achat_conso=0;
     for(let conso in consos){
         prix_conso+=consos[conso]["prix"];
+        prix_achat_conso+=stock[conso]["prix_achat"]*consos[conso]["quantité"];
     }
     //calcul du prix total des consos restantes
     let prix_restant=prix_stock-prix_conso;
-    return [prix_stock,prix_conso,prix_restant];
+    //calcul de la marge
+    let prix_achat_restant=prix_achat-prix_achat_conso;
+    return [prix_stock,prix_conso,prix_restant,prix_achat,prix_achat_conso,prix_achat_restant];
 }
 function affiche_prix(data){
     let affichage=document.getElementById("prix");
     affichage.innerHTML="Stock total : "+(data[0]*0.8).toFixed(2)+"€<br>Conso vendues : "+(data[1]*0.8).toFixed(2)+"€<br>Conso restantes : "+(data[2]*0.8).toFixed(2)+"€";
-
+    affichage.innerHTML+="</br></br>Stock total (achat) : "+data[3].toFixed(2)+"€<br>Conso vendues (achat) : "+data[4].toFixed(2)+"€<br>Conso restantes (achat) : "+data[5].toFixed(2)+"€";
+    affichage.innerHTML+="</br></br>Marge total : "+(data[0]*0.8-data[3]).toFixed(2)+"€<br>Marge vendu : "+(data[1]*0.8-data[4]).toFixed(2)+"€";
 }
 //fonction pour créer une liste déroulante avec le nombre de jour voulu dans l'affichage du graphique
 function liste_deroulante(){
