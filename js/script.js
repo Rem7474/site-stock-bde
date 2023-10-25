@@ -294,15 +294,14 @@ function calcul_stock(details){
 function updateproduit(event){
     document.getElementById("id_conso").value=event.target.id;
     document.getElementById("cost_conso").value=event.target.value;
-    getprixachat(event.target.id)
+    document.getElementById("prix_achat").value=getprixachat(event.target.id);
 }
 function getprixachat(id){
     //parcours le localstorage pour renvoyer le prix d'achat qui correspond à l'id
     let stock=localStorage.getItem("stock_courses");
-    for (let conso in stock){
-        console.log(conso);
-    }
-
+    stock=JSON.parse(stock);
+    let prix_achat=stock[id]["prix_achat"];
+    return prix_achat;
 }
 function gestion_stock(event){
     let stock=calcul_stock("all");
