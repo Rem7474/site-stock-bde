@@ -46,8 +46,10 @@ function panier(event){
         //appel de la fonction save pour enregistrer les données
         save(dicoConso);
         //reset des variables
-        dicoConso={};
-        dicoAffichage={};
+        setTimeout(() => {
+            dicoConso={};
+            dicoAffichage={};
+        }, 1000);
     }
     else{
     //appel de la fonction conso pour créer la liste
@@ -136,7 +138,6 @@ function affichage(data,id="tableau"){
 }
 function save(listeConsos){
     //enregistrer les données dans le local storage en format JSON en précisant l'heure et la date
-    document.getElementById('checkout').classList.remove('anim1');
     let date=new Date();
     let heure=date.getHours()+":"+date.getMinutes();
     let jour=date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
@@ -150,6 +151,7 @@ function save(listeConsos){
     affichage(listeConsos);
     stock_calcul=calcul_stock();
     check_stock();
+    document.getElementById('checkout').classList.remove('anim1');
 
 }
 function listeconsodispo(){
@@ -292,8 +294,16 @@ function calcul_stock(details){
 function updateproduit(event){
     document.getElementById("id_conso").value=event.target.id;
     document.getElementById("cost_conso").value=event.target.value;
+    getprixachat(event.target.id)
 }
+function getprixachat(id){
+    //parcours le localstorage pour renvoyer le prix d'achat qui correspond à l'id
+    let stock=localStorage.getItem("stock_courses");
+    for (let conso in stock){
+        console.log(conso);
+    }
 
+}
 function gestion_stock(event){
     let stock=calcul_stock("all");
     conso_calcul=stock[0];
