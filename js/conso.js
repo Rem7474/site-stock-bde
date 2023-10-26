@@ -11,21 +11,13 @@ function stock_actuel(){
         if (key!="stock_courses"){
             let value=localStorage.getItem(key);
             value=JSON.parse(value);
-            /*
             for (let conso in value.consos){
-                if (stock[conso]==undefined){
-                    stock[conso]={};
-                    stock[conso]["quantité"]=parseInt(value.consos[conso]);
-                    stock[conso]["prix"]=parseFloat(value.consos[conso])*parseFloat(value.prix);
-                }
-                else{
-                    stock[conso]["quantité"]+=parseInt(value.consos[conso]);
-                    stock[conso]["prix"]+=parseFloat(value.consos[conso])*parseFloat(value.prix);
-                }
-                */
+                stock[conso]["quantité"]-=value.consos[conso];
             console.log(value);
             }
         }
+    }
+    console.log(stock);
     return stock;
 }
 
