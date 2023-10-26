@@ -1,0 +1,6 @@
+.produit button:disabled{
+    display: none;
+}
+nav{
+    display: none;
+}
