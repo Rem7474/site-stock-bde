@@ -158,10 +158,27 @@ function save(listeConsos){
 function calcul_prix(listeConsos){
     //calcul le prix total des consos
     let prix=0;
-    /*for(let conso in listeConsos){
-        prix+=listeConsos[conso]*dicoConso[conso];
+    let madeleine=0;
+    let cafe=0;
+    for(let conso in listeConsos){
+        //si le nom commence par "Moelleux"+...
+        if(conso.startsWith("Moelleux") || conso.startsWith("Cake")){
+            madeleine+=listeConsos[conso]["quantité"];
+        }
+        else if(conso.startsWith("Café")){
+            cafe+=listeConsos[conso]["quantité"];
+        }
+        else{
+            prix+=listeConsos[conso]["prix"]*listeConsos[conso]["quantité"];
+        }
     }
-    return prix;*/
+    if(madeleine=2 && cafe==1){
+        prix+=1.6;
+    }
+    else{
+        prix+=madeleine*0.8+cafe*0.4;
+    }
+    return prix;
     console.log(listeConsos);
 }
 function listeconsodispo(){
