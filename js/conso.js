@@ -15,6 +15,7 @@ function stock_actuel(){
                 stock[conso]["quantité"]-=value.consos[conso];
                 if (stock[conso]["quantité"]<=0){
                     delete stock[conso];
+                    console.log("suppression de "+conso);
                 }
             }
         }
