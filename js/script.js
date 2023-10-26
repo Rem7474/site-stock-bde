@@ -178,8 +178,8 @@ function calcul_prix(listeConsos){
     else{
         prix+=madeleine*0.8+cafe*0.4;
     }
+    console.log("prix total : "+prix);
     return prix;
-    console.log(listeConsos);
 }
 function listeconsodispo(){
     //récupère les données du local storage
