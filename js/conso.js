@@ -13,7 +13,9 @@ function stock_actuel(){
             value=JSON.parse(value);
             for (let conso in value.consos){
                 stock[conso]["quantité"]-=value.consos[conso];
-            console.log(value);
+                if (stock[conso]["quantité"]<=0){
+                    delete stock[conso];
+                }
             }
         }
     }
