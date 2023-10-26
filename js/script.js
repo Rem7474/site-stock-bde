@@ -145,6 +145,7 @@ function save(listeConsos){
     consos["jour"]=jour;
     consos["heure"]=heure;
     consos["consos"]=listeConsos;
+    consos["prix"]=calcul_prix(listeConsos);
     //ajout des données dans le local storage avec un id unique
     let id=Date.now();
     localStorage.setItem(id,JSON.stringify(consos));
@@ -153,6 +154,15 @@ function save(listeConsos){
     check_stock();
     document.getElementById('checkout').classList.remove('anim1');
 
+}
+function calcul_prix(listeConsos){
+    //calcul le prix total des consos
+    let prix=0;
+    /*for(let conso in listeConsos){
+        prix+=listeConsos[conso]*dicoConso[conso];
+    }
+    return prix;*/
+    console.log(listeConsos);
 }
 function listeconsodispo(){
     //récupère les données du local storage
