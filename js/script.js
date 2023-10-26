@@ -129,7 +129,8 @@ function affichage(data,id="tableau"){
     cellule3=document.createElement("td");
     cellule1.innerHTML="Total";
     cellule2.innerHTML=quantite_total;
-    cellule3.innerHTML=(conso_total*0.8).toFixed(2)+"€" + " ("+conso_total+")";
+    cellule3.innerHTML=calcul_prix(data).toFixed(2)+"€";
+    //cellule3.innerHTML=(conso_total*0.8).toFixed(2)+"€" + " ("+conso_total+")";
     ligne.appendChild(cellule1);
     ligne.appendChild(cellule2);
     ligne.appendChild(cellule3);
