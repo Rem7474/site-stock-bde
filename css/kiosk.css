@@ -1,4 +1,4 @@
-.produit button:disabled{
+.buttons button:disabled{
     display: none;
 }
 nav{
