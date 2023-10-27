@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="./js/script.js" defer></script>
+    <!--<script src="./js/script.js" defer></script>-->
     <script src="./js/conso.js" defer></script>
     <script src="./js/anim.js" defer></script>
     <link rel="stylesheet" href="./css/default.css">
@@ -13,8 +13,8 @@
     <nav>
         <div class="menu">
             <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="listeconso.php">Mise a jour des stock</a></li>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="listeconso.html">Mise a jour des stock</a></li>
                 <li><a href="stock.html">Statistiques de Vente</a></li>
             </ul>
         </div>
@@ -31,9 +31,9 @@
                     <button name="FuzeTea" type="button" id="Fuzetea" value="1" class="clickage conso fuze">FuzeTea</button>
                     <button name="Oasis Pomme Cassis Framboise" type="button" id="opcf" value="1" class="clickage conso opcf">Oasis Pomme Cassis Framboise</button>
                     <button name="Schweppes Agrumes" type="button" id="schweppes" value="1" class="clickage conso schweppes">Schweppes Agrumes</button>
-                    <button name="Cacolac" type="button" id="cacolac" value="1" class="clickage conso cacolac">Cacolac</button>
-                    <button name="Minute Maid" type="button" id="maid" value="1" class="clickage conso maid">Minute Maid</button>
-                    <button name="Café" type="button" id="cafe" value="0.5" class="clickage conso cafe">Café</button>
+                    <button name="Cacolac" type="button" id="cacolac" value="1" class="clickage conso cacolac" data-formule="boisson_ptit_dej">Cacolac</button>
+                    <button name="Minute Maid" type="button" id="maid" value="1" class="clickage conso maid" data-formule="boisson_ptit_dej">Minute Maid</button>
+                    <button name="Café" type="button" id="cafe" value="0.5" class="clickage conso cafe" data-formule="boisson_ptit_dej">Café</button>
                 </div>
             </div>
             <div id="boisson_2_conso">
@@ -58,10 +58,10 @@
                     <button name="Snickers" type="button" id="snickers" value="1" class="clickage conso snickers">Snickers</button>
                     <button name="Twix" type="button" id="twix" value="1" class="clickage conso twix">Twix</button>
                     <button name="Chips" type="button" id="chips" value="1" class="clickage conso chips">Chips</button>
-                    <button name="Moelleux" type="button" id="madeleine_moelleux" value="1" class="clickage conso marbre">Moelleux</button>
-                    <button name="Moelleux Chocolat" type="button" id="madeleine_chocolat" value="1" class="clickage conso tout_choco">Moelleux Chocolat</button>
-                    <button name="Moelleux Caramel" type="button" id="madeleine_caramel" value="1" class="clickage conso caramel">Moelleux Caramel</button>
-                    <button name="Cake Pépite Chocolat" type="button" id="madeleine_pepite" value="1" class="clickage conso pepite_chocolat">Cake Pépite Chocolat</button>
+                    <button name="Moelleux" type="button" id="madeleine_moelleux" value="1" class="clickage conso marbre" data-formule="snack_ptit_dej">Moelleux</button>
+                    <button name="Moelleux Chocolat" type="button" id="madeleine_chocolat" value="1" class="clickage conso tout_choco" data-formule="snack_ptit_dej">Moelleux Chocolat</button>
+                    <button name="Moelleux Caramel" type="button" id="madeleine_caramel" value="1" class="clickage conso caramel" data-formule="snack_ptit_dej">Moelleux Caramel</button>
+                    <button name="Cake Pépite Chocolat" type="button" id="madeleine_pepite" value="1" class="clickage conso pepite_chocolat" data-formule="snack_ptit_dej">Cake Pépite Chocolat</button>
                 </div>
             </div>
         </div>
@@ -69,8 +69,11 @@
         <div class="container1">
             <div id=checkout class="checkout">
                 <h3 id=total></h3>
-                <div class="table" id="tableau"></div>
-                <button type=button id="save" class="save">Valider le panier</button>
+                <div id="tableau"></div>
+                <div class="button_panier">
+                    <button type=button id="cancel" class="cancel">Vider</button>
+                    <button type=button id="save" class="save">Valider le panier</button>
+                </div>
             </div>
         </div>
     </div>
