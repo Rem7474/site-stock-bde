@@ -134,7 +134,9 @@ nav ul li a{
   border: solid 1px rgba(255, 255, 255, 0.6);
   transition: all 0.2s ease-in-out;
 }
-
+.button_add{
+  width: auto;
+}
 .save:hover, .button_add:hover {
   background-color: #0080ff;
   cursor: pointer;
@@ -392,6 +394,11 @@ img{
   text-align: center;
   background-color: #f2d3b4;
   align-self: center;
+  color: black;
+  font-size: larger;
+}
+.formulaire input:required{
+  font-weight: bold;
 }
 .formulaire label{
   text-align: center;
@@ -405,4 +412,21 @@ img{
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*PAGE LISTE CONSO*/
+.badge_stock{
+  position: relative;
+  right: -25px;
+  bottom: -45px;
+  background-color: #f2d3b4;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: block;
+  color: black;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  padding: 5px;
 }

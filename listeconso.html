@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="./js/script.js" defer></script>
+    <script src="./js/majstock.js" defer></script>
     <link rel="stylesheet" href="./css/default.css">
     <title>Liste des consos disponibles au BDE R&T</title>
 </head>
@@ -22,43 +22,177 @@
     <div id="boissons_1_conso">
         <h2>Boissons à 1 conso</h2>
         <div class="buttons">
-            <button name="Coca-Cola" type="button" id="coca" value="1" class="clickage conso coca">Coca-Cola</button>
-            <button name="Coca-Cola Cherry" type="button" id="coca_cherry" value="1" class="clickage conso cherry">Coca-Cola Cherry</button>
-            <button name="Lipton Ice-Tea" type="button" id="Lipton" value="1" class="clickage conso icetea">Lipton</button>
-            <button name="FuzeTea" type="button" id="Fuzetea" value="1" class="clickage conso fuze">FuzeTea</button>
-            <button name="Oasis Pomme Cassis Framboise" type="button" id="opcf" value="1" class="clickage conso opcf">Oasis Pomme Cassis Framboise</button>
-            <button name="Schweppes Agrumes" type="button" id="schweppes" value="1" class="clickage conso schweppes">Schweppes Agrumes</button>
-            <button name="Cacolac" type="button" id="cacolac" value="1" class="clickage conso cacolac">Cacolac</button>
-            <button name="Minute Maid" type="button" id="maid" value="1" class="clickage conso maid">Minute Maid</button>
-            <button name="Café" type="button" id="cafe" value="0.5" class="clickage conso cafe">Café</button>
+            <div class="maj_stock">
+                <button name="Coca-Cola" type="button" id="coca" value="1" class="clickage conso coca">
+                    <span class="badge_stock" id="stock_coca">0</span>
+                </button>
+            </div>
+            <div class="maj_stock">
+                <button name="Coca-Cola Cherry" type="button" id="coca_cherry" value="1" class="clickage conso cherry">
+                    <span class="badge_stock" id="stock_cherry">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Lipton Ice-Tea" type="button" id="Lipton" value="1" class="clickage conso icetea">
+                    <span class="badge_stock" id="stock_lipton">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="FuzeTea" type="button" id="Fuzetea" value="1" class="clickage conso fuze">
+                    <span class="badge_stock" id="stock_fuze">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Oasis Pomme Cassis Framboise" type="button" id="opcf" value="1" class="clickage conso opcf">
+                    <span class="badge_stock" id="stock_opcf">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Schweppes Agrumes" type="button" id="schweppes" value="1" class="clickage conso schweppes">
+                    <span class="badge_stock" id="stock_schweppes">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Cacolac" type="button" id="cacolac" value="1" class="clickage conso cacolac">
+                    <span class="badge_stock" id="stock_cacolac">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Minute Maid" type="button" id="maid" value="1" class="clickage conso maid">
+                    <span class="badge_stock" id="stock_maid">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Café" type="button" id="cafe" value="0.5" class="clickage conso cafe">
+                    <span class="badge_stock" id="stock_cafe">0</span>
+                </button>
+                
+            </div>
         </div>
     </div>
     <div id="boisson_2_conso">
         <h2>Boissons à 2 conso</h2>
         <div class="buttons">
-            <button name="RedBull" type="button" id="redbull" value="2" class="clickage conso redbull">RedBull</button>
-            <button name="Monster" type="button" id="monster" value="2" class="clickage conso monster">Monster</button>
-            <button name="Monster Mango-Loco" type="button" id="mangoloco" value="2" class="clickage conso mangoloco">Monster Mango Loco</button>
+            <div class="maj_stock">
+                <button name="RedBull" type="button" id="redbull" value="2" class="clickage conso redbull">
+                    <span class="badge_stock" id="stock_redbull">0</span>
+                </button>
+               
+            </div>
+            <div class="maj_stock">
+                <button name="Monster" type="button" id="monster" value="2" class="clickage conso monster">
+                    <span class="badge_stock" id="stock_monster">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Monster Mango-Loco" type="button" id="mangoloco" value="2" class="clickage conso mangoloco">
+                    <span class="badge_stock" id="stock_mangoloco">0</span>
+                </button>
+                
+            </div>
         </div>
     </div>
     <div id="snacks">
         <h2>Snacks à 1 conso</h2>
         <div class="buttons">
-            <button name="Lion" type="button" id="lion" value="1" class="clickage conso lion">Lion</button>
-            <button name="Lion Peanut" type="button" id="lion_peanut" value="1" class="clickage conso lionp">Lion Peanut</button>
-            <button name="M&M's" type="button" id="Mms" value="1" class="clickage conso mms">M&M's</button>
-            <button name="Kinder Bueno" type="button" id="kinder_bueno" value="1" class="clickage conso bueno">Kinder Bueno</button>
-            <button name="Kinder Bueno White" type="button" id="kinder_bueno_white" value="1" class="clickage conso buenow">Kinder Bueno White</button>
-            <button name="Crunch" type="button" id="crunch" value="1" class="clickage conso crunch">Crunch</button>
-            <button name="Kit-Kat" type="button" id="kitkat" value="1" class="clickage conso kitkat">Kit-Kat</button>
-            <button name="Kit-Kat Chunky" type="button" id="kitkat_chunky" value="1" class="clickage conso kitkatchunky">Kit-Kat Chunky</button>
-            <button name="Snickers" type="button" id="snickers" value="1" class="clickage conso snickers">Snickers</button>
-            <button name="Twix" type="button" id="twix" value="1" class="clickage conso twix">Twix</button>
-            <button name="Chips" type="button" id="chips" value="1" class="clickage conso chips">Chips</button>
-            <button name="Moelleux" type="button" id="madeleine_moelleux" value="1" class="clickage conso marbre">Moelleux</button>
-            <button name="Moelleux Chocolat" type="button" id="madeleine_chocolat" value="1" class="clickage conso tout_choco">Moelleux Chocolat</button>
-            <button name="Moelleux Caramel" type="button" id="madeleine_caramel" value="1" class="clickage conso caramel">Moelleux Caramel</button>
-            <button name="Cake Pépite Chocolat" type="button" id="madeleine_pepite" value="1" class="clickage conso pepite_chocolat">Cake Pépite Chocolat</button>
+            <div class="maj_stock">
+                <button name="Lion" type="button" id="lion" value="1" class="clickage conso lion">
+                    <span class="badge_stock" id="stock_lion">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Lion Peanut" type="button" id="lion_peanut" value="1" class="clickage conso lionp">
+                    <span class="badge_stock" id="stock_lionp">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="M&M's" type="button" id="Mms" value="1" class="clickage conso mms">
+                    <span class="badge_stock" id="stock_mms">0</span>
+                </button>
+              
+            </div>
+            <div class="maj_stock">
+                <button name="Kinder Bueno" type="button" id="kinder_bueno" value="1" class="clickage conso bueno">
+                    <span class="badge_stock" id="stock_bueno">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Kinder Bueno White" type="button" id="kinder_bueno_white" value="1" class="clickage conso buenow">
+                    <span class="badge_stock" id="stock_buenow">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Crunch" type="button" id="crunch" value="1" class="clickage conso crunch">
+                    <span class="badge_stock" id="stock_crunch">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Kit-Kat" type="button" id="kitkat" value="1" class="clickage conso kitkat">
+                    <span class="badge_stock" id="stock_kitkat">0</span>
+                </button>
+               
+            </div>
+            <div class="maj_stock">
+                <button name="Kit-Kat Chunky" type="button" id="kitkat_chunky" value="1" class="clickage conso kitkatchunky">
+                    <span class="badge_stock" id="stock_kitkatchunky">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Snickers" type="button" id="snickers" value="1" class="clickage conso snickers">
+                    <span class="badge_stock" id="stock_snickers">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Twix" type="button" id="twix" value="1" class="clickage conso twix">
+                    <span class="badge_stock" id="stock_twix">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Chips" type="button" id="chips" value="1" class="clickage conso chips">
+                    <span class="badge_stock" id="stock_chips">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Moelleux" type="button" id="madeleine_moelleux" value="1" class="clickage conso marbre">
+                    <span class="badge_stock" id="stock_moelleux">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Moelleux Chocolat" type="button" id="madeleine_chocolat" value="1" class="clickage conso tout_choco">
+                    <span class="badge_stock" id="stock_chocolat">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Moelleux Caramel" type="button" id="madeleine_caramel" value="1" class="clickage conso caramel">
+                    <span class="badge_stock" id="stock_caramel">0</span>
+                </button>
+                
+            </div>
+            <div class="maj_stock">
+                <button name="Cake Pépite Chocolat" type="button" id="madeleine_pepite" value="1" class="clickage conso pepite_chocolat">
+                    <span class="badge_stock" id="stock_pepite">0</span>
+                </button>
+                
+            </div>
         </div>
     </div>
 </div>

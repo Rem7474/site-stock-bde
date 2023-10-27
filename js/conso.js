@@ -1,3 +1,7 @@
+//AUTHOR: REMY CUVELIER
+//DATE: 2023.10.27
+//PROJECT: STOCK BDE
+
 //variables globales
 var Temp_Local_Storage={};
 window.addEventListener("storage",update_windows);
