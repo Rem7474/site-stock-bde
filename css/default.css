@@ -370,22 +370,31 @@ img{
 }
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*PAGE CALCUL STOCK*/
+.page{
+  display: inline-flex;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+}
 .resume{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 20px;
 }
-.page{
-  height: 100%;
-  width: 80%;
+#stock_restant{
+  flex-direction: row;
+  display: flex;
 }
 #graphique{
   width: 800px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #f2d3b4;
   box-shadow: 0px 0px 10px black;
+  border-radius: 20px;
+  padding: 15px;
+}
+#graphique label{
+  padding-left: 20px;
+
 }
 .formulaire input{
   width: 200px;
@@ -412,6 +421,34 @@ img{
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+.table_stock, #prix{
+  padding: 20px;
+}
+.table_stock{
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+.table_stock tr{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: larger;
+}
+.table_stock tr :first-child{
+  justify-content: flex-start;
+}
+.table_stock tr:last-child{
+  margin-top: auto;
+  border-top: solid 1px white;
+  padding-top: 2em;
+
+}
+#prix, #graphique{
+  color:white;
+  font-size: larger;
 }
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*PAGE LISTE CONSO*/

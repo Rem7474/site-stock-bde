@@ -16,27 +16,31 @@
             <li><a href="stock.html">Statistiques de Vente</a></li>
         </ul>
     </nav>
-<h1>Calcul de stock du BDE R&T</h1>
-<div class="page">
-    <div class="resume">
-        <div>
-            <h2>Stock Vendu</h2>
-            <div id="stock_vendu"></div>
+    
+    <h1>Calcul de stock du BDE R&T</h1>
+    <div class="page">
+        <div class="gauche">
+            <div class="resume">
+                <div>
+                    <h2>Stock Restant</h2>
+                    <div id="stock_restant"></div>
+                </div>
+            </div>
+            <div class="resume">
+                <h2>Résumé Stock</h2>
+                <div id="prix"></div>
+            </div>
         </div>
-        <div>
-            <h2>Stock Restant</h2>
-            <div id="stock_restant"></div>
+        <div class="droite">
+            <h2>Graphique des ventes</h2>
+            <div id="graphique">
+                <label for="nb_jour">Nombre de jour :</label>
+            <select name="nb_jour" id="nb_jour">
+                <option value="0" selected>0</option>
+            </select>
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
     </div>
-    <h2>Résumé Stock</h2>
-    <div id="prix"></div>
-    <!--Formulaire pour demander nombre de jour voulu dans une liste déroulante-->
-    <h2>Nombre de jour à montrer</h2>
-    <label for="nb_jour">Nombre de jour :</label>
-    <select name="nb_jour" id="nb_jour"></select>
-    <div id="graphique">
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
 </body>
 </html>
