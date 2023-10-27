@@ -85,6 +85,43 @@ h1{
   width: 300px;
   height: 100%;
 }
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+nav ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(22, 22, 23, .8);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  position: relative;
+  z-index: 3;
+}
+nav ul li{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  transition: all .2s ease-in-out;
+}
+nav ul li:hover{
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transform: scale(1.1);
+}
+nav ul li a{
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: larger;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+}
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 .save, .button_add{
