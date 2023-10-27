@@ -5,6 +5,9 @@ window.addEventListener("load",update_windows);
 
 function display_stock(){
     let stock = localStorage.getItem("stock_courses");
+    if (stock==null){
+        stock = "{}";
+    }
     stock = JSON.parse(stock);
     let keys = Object.keys(stock);
     for (let key of keys){
@@ -57,6 +60,9 @@ function save_stock(event){
 
 function get_prix_achat(id_conso){
     let stock = localStorage.getItem("stock_courses");
+    if (stock==null){
+        stock = "{}";
+    }
     let prix_achat;
     stock = JSON.parse(stock);
     if (stock[id_conso]==undefined){
@@ -70,6 +76,9 @@ function get_prix_achat(id_conso){
 
 function get_stock(id_conso){
     let stock = localStorage.getItem("stock_courses");
+    if (stock==null){
+        stock = "{}";
+    }
     let stock_conso;
     stock = JSON.parse(stock);
     if (stock[id_conso]==undefined){
