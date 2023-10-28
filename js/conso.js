@@ -167,6 +167,15 @@ function save_panier(){
     consos["heure"]=heure;
     consos["consos"]=Temp_Local_Storage;
     consos["prix"]=prix_panier()[0];
+    let user_id=document.getElementById('username').getAttribute("data-uid")
+    if (user_id!=null){
+        consos["user_id"]=user_id;
+        //retrait des conso de l'utilisateur
+        let users=localStorage.getItem("users");
+        users=JSON.parse(users);
+        users[user_id]["nb_conso"]-=consos["prix"];
+        localStorage.setItem("users",JSON.stringify(users));
+    }
     //ajout des données dans le local storage avec un id unique
     let id=Date.now();
     localStorage.setItem(id,JSON.stringify(consos));
@@ -189,6 +198,7 @@ function rfid(uid){
         if (users[uid]!=undefined){
             //si l'utilisateur est trouvé, on affiche le panier
             document.getElementById('username').value=users[uid]["nom"];
+            document.getElementById('username').setAttribute("data-uid",uid);
         }
         else{
             alert("Vous n'êtes pas autorisé à effectuer des achats");
