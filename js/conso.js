@@ -173,8 +173,14 @@ function save_panier(){
         //retrait des conso de l'utilisateur
         let users=localStorage.getItem("users");
         users=JSON.parse(users);
-        users[user_id]["nb_conso"]-=consos["prix"];
-        localStorage.setItem("users",JSON.stringify(users));
+        if (users[user_id]["nb_conso"]<consos["prix"]){
+            alert("Vous n'avez pas assez de conso pour effectuer cet achat");
+            return;
+        }
+        else{
+            users[user_id]["nb_conso"]-=consos["prix"];
+            localStorage.setItem("users",JSON.stringify(users));
+        }
     }
     //ajout des données dans le local storage avec un id unique
     let id=Date.now();
@@ -185,6 +191,8 @@ function vider_panier(){
     document.getElementById('checkout').classList.remove('anim1');
     setTimeout(() => {
         Temp_Local_Storage={};
+        document.getElementById("username").value="";
+        document.getElementById("username").removeAttribute("data-uid");
     }, 250);
 }
 function rfid(uid){
@@ -197,7 +205,7 @@ function rfid(uid){
         users=JSON.parse(users);
         if (users[uid]!=undefined){
             //si l'utilisateur est trouvé, on affiche le panier
-            document.getElementById('username').value=users[uid]["nom"];
+            document.getElementById('username').value=users[uid]["nom"]+" : "+users[uid]["nb_conso"]+" conso";
             document.getElementById('username').setAttribute("data-uid",uid);
         }
         else{
