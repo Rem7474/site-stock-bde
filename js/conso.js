@@ -188,7 +188,7 @@ function rfid(uid){
         users=JSON.parse(users);
         if (users[uid]!=undefined){
             //si l'utilisateur est trouvé, on affiche le panier
-            document.getElementById('username').innerHTML=users[uid]["nom"];
+            document.getElementById('username').value=users[uid]["nom"];
         }
         else{
             alert("Vous n'êtes pas autorisé à effectuer des achats");
