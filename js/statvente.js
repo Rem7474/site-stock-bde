@@ -136,9 +136,6 @@ function get_infos_ventes_jours(){
                     infos_ventes_jours[value.jour]["prix"]+=parseFloat(value["prix"])*0.8;
                 }
             }
-            console.log(value);
-            console.log(value["prix"]);
-            
         }
     }
     return infos_ventes_jours;
