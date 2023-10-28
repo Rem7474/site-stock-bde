@@ -4,11 +4,14 @@
 
 //variables globales
 var Temp_Local_Storage={};
+var ip_rfid_reader = "http://bde.local:8080/api/uid";
+
 window.addEventListener("storage",update_windows);
 window.addEventListener("load",update_windows);
 
 document.getElementById("save").addEventListener("click",save_panier);
 document.getElementById("cancel").addEventListener("click",vider_panier);
+document.getElementById("uid_rfid").addEventListener("click",get_uid);
 function update_windows(){
     console.log("actualisation de la page");
     
@@ -174,4 +177,44 @@ function vider_panier(){
     setTimeout(() => {
         Temp_Local_Storage={};
     }, 250);
+}
+function rfid(uid){
+    console.log("rfid");
+    console.log(uid);
+    let users=localStorage.getItem("users");
+    if (uid!=null && users!=undefined){
+        //recherche de l'utilisateur dans le local storage
+        
+        users=JSON.parse(users);
+        if (users[uid]!=undefined){
+            //si l'utilisateur est trouvé, on affiche le panier
+            document.getElementById('username').innerHTML=users[uid]["nom"];
+        }
+        else{
+            alert("Vous n'êtes pas autorisé à effectuer des achats");
+        }
+    }
+    else{
+        alert("Le badge ou l'utilisateur n'a pas été trouvé");
+    }
+}
+function get_uid(){
+    //requète AJAX pour récupérer l'uid du badge
+    let uid;
+    let xhr=new XMLHttpRequest();
+    xhr.open("GET",ip_rfid_reader);
+    xhr.responseType="json";
+    xhr.onload=function(){
+        if (xhr.readyState===xhr.DONE){
+            if (xhr.status===200){
+                uid=xhr.response.uid;
+                console.log(uid);
+                rfid(uid);
+            }
+            else{
+                alert("Impossible de joindre le lecteur RFID");
+            }
+        }
+    }
+    xhr.send();
 }

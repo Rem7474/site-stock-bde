@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<script src="./js/script.js" defer></script>-->
+    <script src="./js/users.js" defer></script>
+    <script src="./js/anim.js" defer></script>
+    <link rel="stylesheet" href="./css/default.css">
+    <title>Vente de Conso du BDE R&T</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="listeconso.html">Mise a jour des stock</a></li>
+            <li><a href="stock.html">Statistiques de Vente</a></li>
+        </ul>
+    </nav>
+    <h1>Vente de Conso du BDE R&T</h1>
+    <div class="interface">
+        <!--Formulaire pour créer un utilisateur-->
+        <form id="form_user" class="adduser">
+            <div class="formulaire">
+                <label for="uid">ID user :</label>
+                <input type="text" name="uid" id="uid" placeholder="" disabled>
+                <label for="nb_conso">Nombre de conso :</label>
+                <input type="number" name="nb_conso" id="nb_conso" placeholder="">
+                <label for="username">Nom :</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+                <button type="button" id="uid_rfid" class="button_add">Lecteur RFID</button>
+                <button type="submit" id="new_user" class="button_add">Valider les modifications</button>
+            
+        </form>
+    </div>
+</body>
+</html>

@@ -120,7 +120,7 @@ function get_infos_ventes_jours(){
     let infos_ventes_jours = {};
     let value;
     for (let key of keys){
-        if (key!="stock_courses"){
+        if (key!="stock_courses" && key!="users"){
             value = localStorage.getItem(key);
             value = JSON.parse(value);
             for(let conso in value.consos){

@@ -216,7 +216,7 @@ tr:last-of-type{
 .colonne3{
   width: 40px;
 }
-.checkout, .addconso {
+.checkout, .addconso, .adduser{
   background-color: rgba(22, 22, 23, .8);
   height: fit-content;
   z-index: 2;
