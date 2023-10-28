@@ -6,10 +6,14 @@
 var Temp_Local_Storage={};
 window.addEventListener("storage",update_windows);
 window.addEventListener("load",update_windows);
+
 document.getElementById("save").addEventListener("click",save_panier);
 document.getElementById("cancel").addEventListener("click",vider_panier);
 function update_windows(){
+    console.log("actualisation de la page");
+    
     let stock = stock_actuel();
+    console.log(stock);
     //liste des boutons de la page
     let boutons=document.getElementsByClassName("conso");
     for (let bouton of boutons){
@@ -32,7 +36,7 @@ function stock_actuel(){
             let value=localStorage.getItem(key);
             value=JSON.parse(value);
             for (let conso in value.consos){
-                stock[conso]["quantité"]-=value.consos[conso];
+                stock[conso]["quantité"]-=parseInt(value.consos[conso]["quantité"]);
             }
         }
     }

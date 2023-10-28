@@ -129,12 +129,16 @@ function get_infos_ventes_jours(){
                 if(infos_ventes_jours[value.jour]==undefined){
                     infos_ventes_jours[value.jour]={};
                     infos_ventes_jours[value.jour]["quantité"]=quantite;
+                    infos_ventes_jours[value.jour]["prix"]=parseFloat(value["prix"])*0.8;
                 }
                 else{
                     infos_ventes_jours[value.jour]["quantité"]+=quantite;
+                    infos_ventes_jours[value.jour]["prix"]+=parseFloat(value["prix"])*0.8;
                 }
             }
-            infos_ventes_jours[value.jour]["prix"]=parseFloat(value["prix"])*0.8;
+            console.log(value);
+            console.log(value["prix"]);
+            
         }
     }
     return infos_ventes_jours;
@@ -256,10 +260,12 @@ function update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_acha
     let texte="Prix d'achat total : "+prix_achat+"€<br>";
     texte+="Prix de vente total : "+prix_vente+"€<br>";
     texte+="Marge total des courses: "+marge_total.toFixed(2)+"€<br>";
+    texte+="Prix d'achat des courses vendues : "+prix_achat_vendu+"€<br>";
     texte+="Prix d'achat du stock restant : "+prix_stock_restant_achat+"€<br>";
     texte+="Prix de vente du stock restant : "+prix_stock_restant_vente+"€<br>";
     texte+="Marge actuel : "+marge_actuel.toFixed(2)+"€<br>";
-    texte+="Pourcentage vendu : "+pourcentage_prix_vendu+"%<br>";
     texte+="Pourcentage de marge moyenne : "+pourcetage_marge+"%<br>";
+    texte+="Pourcentage vendu : "+pourcentage_prix_vendu+"%<br>";
+    texte+="Total vendu : "+(prix_vendu).toFixed(2)+"€<br>";
     document.getElementById("prix").innerHTML=texte;
 }
