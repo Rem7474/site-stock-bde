@@ -151,7 +151,9 @@ function get_infos_ventes_produit(){
             value = JSON.parse(value);
             for(let conso in value.consos){
                 let quantite=parseInt(value.consos[conso]["quantité"]);
-                
+                if (infos_ventes_produit[value.jour]==undefined){
+                    infos_ventes_produit[value.jour]={};
+                }
                 if(infos_ventes_produit[value.jour][conso]==undefined){
                     infos_ventes_produit[value.jour][conso]={};
                     infos_ventes_produit[value.jour][conso]["quantité"]=quantite;
@@ -164,7 +166,6 @@ function get_infos_ventes_produit(){
             }
         }
     }
-    console.log(infos_ventes_produit);
     return infos_ventes_produit;
 }
 
