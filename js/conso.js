@@ -4,7 +4,7 @@
 
 //variables globales
 var Temp_Local_Storage={};
-var ip_rfid_reader = "http://bde.local:8080/api/uid";
+const IP_RFID = "http://bde.local:8080/api/uid";
 
 window.addEventListener("storage",update_windows);
 window.addEventListener("load",update_windows);
@@ -220,7 +220,7 @@ function get_uid(){
     //requète AJAX pour récupérer l'uid du badge
     let uid;
     let xhr=new XMLHttpRequest();
-    xhr.open("GET",ip_rfid_reader);
+    xhr.open("GET",IP_RFID);
     xhr.responseType="json";
     xhr.onload=function(){
         if (xhr.readyState===xhr.DONE){
