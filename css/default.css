@@ -318,6 +318,9 @@ img{
 .monster{
   background-image: url("../img/moooonstre.png");
 }
+.punch{
+  background-image: url("../img/monster\ punch.png");
+}
 /*                    ------------------------------------------------------------------------------                    */
 .lion{
   background-image: url("../img/lion.png");
