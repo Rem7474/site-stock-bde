@@ -141,6 +141,33 @@ function get_infos_ventes_jours(){
     return infos_ventes_jours;
 }
 
+function get_infos_ventes_produit(){
+    let keys = Object.keys(localStorage);
+    let infos_ventes_produit = {};
+    let value;
+    for (let key of keys){
+        if (key!="stock_courses" && key!="users"){
+            value = localStorage.getItem(key);
+            value = JSON.parse(value);
+            for(let conso in value.consos){
+                let quantite=parseInt(value.consos[conso]["quantité"]);
+                
+                if(infos_ventes_produit[value.jour][conso]==undefined){
+                    infos_ventes_produit[value.jour][conso]={};
+                    infos_ventes_produit[value.jour][conso]["quantité"]=quantite;
+                    infos_ventes_produit[value.jour][conso]["prix"]=parseFloat(value["prix"])*0.8;
+                }
+                else{
+                    infos_ventes_produit[value.jour][conso]["quantité"]+=quantite;
+                    infos_ventes_produit[value.jour][conso]["prix"]+=parseFloat(value["prix"])*0.8;
+                }
+            }
+        }
+    }
+    console.log(infos_ventes_produit);
+    return infos_ventes_produit;
+}
+
 function graphique(data_day,nb_day){
     //reset le canvas
     document.getElementById("myChart").remove();
