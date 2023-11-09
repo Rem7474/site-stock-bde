@@ -312,7 +312,7 @@ function update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_acha
     let marge_total=prix_vente-prix_achat;
     let prix_vendu=get_prix_vendu();
     let prix_achat_vendu=prix_achat-prix_stock_restant_achat;
-    let pourcentage_prix_vendu=(prix_vendu/prix_achat*100).toFixed(2);
+    let pourcentage_prix_vendu=(prix_vendu/prix_vente*100).toFixed(2);
     let pourcetage_marge=(marge_total/prix_achat*100).toFixed(2);
     let marge_actuel=prix_vendu-prix_achat_vendu;
     let texte="Prix d'achat total : "+prix_achat+"€<br>";
