@@ -394,14 +394,14 @@ img{
   flex-direction: row;
   display: flex;
 }
-#graphique{
+#graphique, #graphique_conso{
   width: 800px;
   background-color: #f2d3b4;
   box-shadow: 0px 0px 10px black;
   border-radius: 20px;
   padding: 15px;
 }
-#graphique label{
+#graphique label, #graphique_conso label{
   padding-left: 20px;
 
 }

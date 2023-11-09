@@ -33,13 +33,22 @@
             </div>
         </div>
         <div class="droite">
-            <h2>Graphique des ventes</h2>
+            <h2>Graphique des ventes Par jours</h2>
             <div id="graphique">
                 <label for="nb_jour">Nombre de jour :</label>
             <select name="nb_jour" id="nb_jour">
                 <option value="0" selected>0</option>
             </select>
                 <canvas id="myChart"></canvas>
+            </div>
+
+            <h2>Graphique des ventes Par consos</h2>
+            <div id="graphique_conso">
+                <label for="id_conso">Nom de la conso :</label>
+            <select name="id_conso" id="id_conso">
+                <option value="coca" selected>coca</option>
+            </select>
+                <canvas id="myChart2"></canvas>
             </div>
         </div>
     </div>
