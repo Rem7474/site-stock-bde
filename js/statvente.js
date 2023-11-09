@@ -277,7 +277,7 @@ function tableau_stock_restant(stock,prix_vente){
 
 function update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_achat,prix_vente){
     let marge_total=prix_vente-prix_achat;
-    let marge_actuel=prix_achat-prix_stock_restant_achat;
+    let marge_actuel=prix_stock_restant_vente-prix_stock_restant_achat;
     let prix_vendu=prix_vente-prix_stock_restant_vente;
     let prix_achat_vendu=prix_achat-prix_stock_restant_achat;
     let pourcentage_prix_vendu=(prix_vendu/prix_achat*100).toFixed(2);
