@@ -1,3 +1,7 @@
+//AUTHOR: REMY CUVELIER
+//DATE: 2023.11.09
+//PROJECT: STOCK BDE
+
 function save_localStorage() {
     let keys = Object.keys(localStorage);
 
@@ -18,7 +22,7 @@ function save_localStorage() {
 
 }
 
-function import_localStorage() {
+function import_localStorage(event) {
     localStorage.clear();
     let fichier = event.target.files[0];
     let lecteur = new FileReader();
