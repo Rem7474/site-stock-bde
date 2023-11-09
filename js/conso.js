@@ -67,6 +67,9 @@ function add_panier(event){
             console.log("formule ajoutée")
         }
     }
+    else if (stock_actuel()[idconso]["quantité"]==undefined){
+        alert("Vous n'avez plus de stock pour cette consommation");
+    }
     else if (Temp_Local_Storage[idconso]["quantité"]<stock_actuel()[idconso]["quantité"]){
         Temp_Local_Storage[idconso]["quantité"]+=1;
         Temp_Local_Storage[idconso]["nbconso"]+=nbConso;
@@ -165,10 +168,11 @@ function save_panier(){
     let heure=date.getHours()+":"+date.getMinutes();
     let jour=date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
     let consos={};
+    let total=prix_panier();
     consos["jour"]=jour;
     consos["heure"]=heure;
     consos["consos"]=Temp_Local_Storage;
-    consos["prix"]=prix_panier()[0];
+    consos["prix"]=total[0]-total[1];
     let user_id=document.getElementById('username').getAttribute("data-uid")
     if (user_id!=null){
         consos["user_id"]=user_id;
@@ -188,6 +192,7 @@ function save_panier(){
     let id=Date.now();
     localStorage.setItem(id,JSON.stringify(consos));
     vider_panier();
+    update_windows();
 }
 function vider_panier(){
     document.getElementById('checkout').classList.remove('anim1');

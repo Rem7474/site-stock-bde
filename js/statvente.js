@@ -72,6 +72,19 @@ function get_prix_vente(stock_courses){
     }
     return prix_vente.toFixed(2);
 }
+function get_prix_vendu(){
+    let keys = Object.keys(localStorage);
+    let prix_vendu = 0;
+    let value;
+    for (let key of keys){
+        if (key!="stock_courses" && key!="users"){
+            value = localStorage.getItem(key);
+            value = JSON.parse(value);
+            prix_vendu += value["prix"]*0.8;
+        }
+    }
+    return prix_vendu;
+}
 //fonction de conso.js
 function get_stock(){
     let stock=localStorage.getItem("stock_courses")
@@ -277,20 +290,20 @@ function tableau_stock_restant(stock,prix_vente){
 
 function update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_achat,prix_vente){
     let marge_total=prix_vente-prix_achat;
-    let marge_actuel=prix_stock_restant_vente-prix_stock_restant_achat;
-    let prix_vendu=prix_vente-prix_stock_restant_vente;
+    let prix_vendu=get_prix_vendu();
     let prix_achat_vendu=prix_achat-prix_stock_restant_achat;
     let pourcentage_prix_vendu=(prix_vendu/prix_achat*100).toFixed(2);
     let pourcetage_marge=(marge_total/prix_achat*100).toFixed(2);
+    let marge_actuel=prix_vendu-prix_achat_vendu;
     let texte="Prix d'achat total : "+prix_achat+"€<br>";
     texte+="Prix de vente total : "+prix_vente+"€<br>";
     texte+="Marge total des courses: "+marge_total.toFixed(2)+"€<br>";
-    texte+="Prix d'achat des courses vendues : "+prix_achat_vendu+"€<br>";
     texte+="Prix d'achat du stock restant : "+prix_stock_restant_achat+"€<br>";
     texte+="Prix de vente du stock restant : "+prix_stock_restant_vente+"€<br>";
-    texte+="Marge actuel : "+marge_actuel.toFixed(2)+"€<br>";
     texte+="Pourcentage de marge moyenne : "+pourcetage_marge+"%<br>";
-    texte+="Pourcentage vendu : "+pourcentage_prix_vendu+"%<br>";
+    texte+="Prix d'achat des courses vendues : "+prix_achat_vendu+"€<br>";
+    texte+="Marge actuel : "+marge_actuel.toFixed(2)+"€<br>";
     texte+="Total vendu : "+(prix_vendu).toFixed(2)+"€<br>";
+    texte+="Pourcentage vendu : "+pourcentage_prix_vendu+"%<br>";
     document.getElementById("prix").innerHTML=texte;
 }
