@@ -138,16 +138,20 @@ function get_infos_ventes_jours(){
             value = JSON.parse(value);
             for(let conso in value.consos){
                 let quantite=parseInt(value.consos[conso]["quantité"]);
-                
                 if(infos_ventes_jours[value.jour]==undefined){
                     infos_ventes_jours[value.jour]={};
                     infos_ventes_jours[value.jour]["quantité"]=quantite;
-                    infos_ventes_jours[value.jour]["prix"]=parseFloat(value["prix"])*0.8;
                 }
                 else{
                     infos_ventes_jours[value.jour]["quantité"]+=quantite;
-                    infos_ventes_jours[value.jour]["prix"]+=parseFloat(value["prix"])*0.8;
                 }
+            }
+            //ICI VERIFIER AVANT SI LA CLE EXISTE
+            if (infos_ventes_jours[value.jour]["prix"]==undefined){
+                infos_ventes_jours[value.jour]["prix"]=parseFloat(value["prix"])*0.8;
+            }
+            else{
+                infos_ventes_jours[value.jour]["prix"]+=parseFloat(value["prix"])*0.8;
             }
         }
     }
