@@ -84,6 +84,7 @@ function prix_panier(){
     let boisson=0;
     let snack=0;
     let reduc=0;
+    let prixboissons=0;
     for (let conso in Temp_Local_Storage){
         total_conso+=Temp_Local_Storage[conso]["nbconso"];
         if (Temp_Local_Storage[conso]["formule"]=="snack_ptit_dej"){
@@ -91,13 +92,14 @@ function prix_panier(){
         }
         else if (Temp_Local_Storage[conso]["formule"]=="boisson_ptit_dej"){
             boisson+=Temp_Local_Storage[conso]["quantité"];
+            prixboissons+=Temp_Local_Storage[conso]["nbconso"];
         }
     }
     //calcul des réductions
-    //si nombre paire de madeleine + 1 boissons par nombre paire de madeleine
-    if (snack%2==0 && boisson==Math.floor(snack/2)){
-        //division entière du nombre de madeleine par 2
-        reduc+=Math.floor(snack/2);
+    //formule ptit déj : 2 snack + 1 boisson = 2conso
+    //calcul du nombre de formule ptit dej dans le panier
+    if (snack>=2 && boisson>=1){
+        reduc=Math.min(Math.floor(snack/2),boisson);
     }
     return [total_conso,reduc];
 }
