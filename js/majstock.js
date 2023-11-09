@@ -14,7 +14,6 @@ function display_stock(){
         let value = stock[key];
         let badge_quantite = document.querySelector("#"+key+" .badge_stock");
         badge_quantite.innerHTML = value["quantité"];
-        console.log(badge_quantite);
     }
 }
 
@@ -28,10 +27,10 @@ function update_windows(){
     document.getElementById("form_stock").addEventListener("submit",save_stock);
 }
 function update_stock_produit(event){
-    document.getElementById("id_conso").value=event.target.id;
-    document.getElementById("cost_conso").value=event.target.value;
-    document.getElementById("prix_achat").value=get_prix_achat(event.target.id);
-    document.getElementById("stock").value=get_stock(event.target.id);
+    document.getElementById("id_conso").value=event.currentTarget.id;
+    document.getElementById("cost_conso").value=event.currentTarget.value;
+    document.getElementById("prix_achat").value=get_prix_achat(event.currentTarget.id);
+    document.getElementById("stock").value=get_stock(event.currentTarget.id);
 }
 function save_stock(event){
     event.preventDefault();
