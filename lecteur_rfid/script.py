@@ -1,7 +1,7 @@
 #AUTHOR: REMY CUVELIER
 #DATE: 2023.10.27
 #PROJECT: STOCK BDE
-#DESCRIPTION: le script se comporte comme un serveur, d'un côté il attend un http get pour afficher le dernier id de carte rfid, de l'autre il lit en continu le lecteur rfid et enregistre le dernier id lu dans une variable
+#DESCRIPTION: script python pour lire l'uid d'un badge rfid et le renvoyer en http
 #VERSION: 1.0
 #utilisation de la librairie SimpleMFRC522 pour lire le lecteur rfid
 #utilisation de la librairie flask pour créer un serveur http
