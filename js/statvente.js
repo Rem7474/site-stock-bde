@@ -63,7 +63,7 @@ function update_windows(){
     console.log(infos_ventes_jours);
     //affichage des stocks
     graphique(infos_ventes_jours,document.getElementById("nb_jour").value);
-    graphique_conso(get_infos_ventes_produit(),document.getElementById("id_conso").value);
+    graphique_conso(get_infos_ventes_produit(),document.getElementById("id_conso").value,document.getElementById("nb_jour").value);
     tableau_stock_restant(stock_restant,prix_stock_restant_vente);
     update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_achat,prix_vente);
 }
@@ -201,36 +201,16 @@ function get_infos_ventes_produit(){
     }
     return infos_ventes_produit;
 }
-
 function graphique(data_day,nb_day){
     //reset le canvas
     document.getElementById("myChart").remove();
     let canvas=document.createElement("canvas");
     canvas.id="myChart";
     document.getElementById("graphique").appendChild(canvas);
-    let labels=Object.keys(data_day);
-    //trie les labels par ordre décroissant
-    labels.sort().reverse();
-    let quantite=[];
-    let prix=[];
-    let day=[];
-    let date=new Date();
-    let jour=date.getDate()-nb_day;
-    let mois=date.getMonth()+1;
-    let annee=date.getFullYear();
-    let date_jour=jour+"/"+mois+"/"+annee;
-
-    for(let label of labels){
-        //check si le jour est dans la limite du nb_day
-        if(label>date_jour){
-            quantite.push(data_day[label]["quantité"]);
-            prix.push(data_day[label]["prix"]);
-            day.push(label);
-        }
-
-        
-
-    }
+    let infos = TrieConsos(data_day,nb_day,false);
+    let quantite=infos[0];
+    let day=infos[1];
+    let prix=infos[2];
     let ctx = document.getElementById('myChart').getContext('2d');
     let myChart = new Chart(ctx, {
         type: 'bar',
@@ -307,7 +287,14 @@ function tableau_stock_restant(stock,prix_vente){
         panier.appendChild(ligne);
         div.appendChild(panier);
 }
+function trierParDate(a, b) {
+    // Convertir les dates au format "jj/mm/aaaa" en objets Date pour la comparaison
+    const dateA = new Date(a.split('/').reverse().join('/'));
+    const dateB = new Date(b.split('/').reverse().join('/'));
 
+    // Comparer les dates et retourner le résultat de la comparaison
+    return dateA - dateB;
+}
 function update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_achat,prix_vente){
     let marge_total=prix_vente-prix_achat;
     let prix_vendu=get_prix_vendu();
@@ -321,46 +308,23 @@ function update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_acha
     texte+="Prix d'achat du stock restant : "+prix_stock_restant_achat+"€<br>";
     texte+="Prix de vente du stock restant : "+prix_stock_restant_vente+"€<br>";
     texte+="Pourcentage de marge moyenne : "+pourcetage_marge+"%<br>";
-    texte+="Prix d'achat des courses vendues : "+prix_achat_vendu+"€<br>";
+    texte+="Prix d'achat des courses vendues : "+prix_achat_vendu.toFixed(2)+"€<br>";
     texte+="Marge actuel : "+marge_actuel.toFixed(2)+"€<br>";
     texte+="Total vendu : "+(prix_vendu).toFixed(2)+"€<br>";
     texte+="Pourcentage vendu : "+pourcentage_prix_vendu+"%<br>";
     document.getElementById("prix").innerHTML=texte;
 }
 
-function graphique_conso(data_day,conso){
-    console.log(data_day)
+function graphique_conso(data_day,conso,nb_day){
     //reset le canvas
     document.getElementById("myChart2").remove();
     let canvas=document.createElement("canvas");
     canvas.id="myChart2";
     document.getElementById("graphique_conso").appendChild(canvas);
-    let labels=Object.keys(data_day);
-    //trie les labels par ordre décroissant
-    labels.sort().reverse();
-    let quantite=[];
-    let prix=[];
-    let day=[];
-    let date=new Date();
-    let jour=date.getDate()-30;
-    let mois=date.getMonth()+1;
-    let annee=date.getFullYear();
-    let date_jour=jour+"/"+mois+"/"+annee;
-
-    for(let label of labels){
-        //check si le jour est dans la limite du nb_day
-        if(label>date_jour){
-            if (data_day[label][conso] != undefined ){
-                quantite.push(data_day[label][conso]["quantité"]);
-                prix.push(data_day[label][conso]["prix"]);
-                day.push(label);
-            }
-            
-        }
-
-        
-
-    }
+    //appelle fonction trie labels
+    let infos = TrieConsos(data_day,nb_day,true,conso);
+    let quantite=infos[0];
+    let day=infos[1];
     //créer une courbe avec un point du nombre de conso par jour
     let ctx = document.getElementById('myChart2').getContext('2d');
     let myChart = new Chart(ctx, {
@@ -389,4 +353,47 @@ function graphique_conso(data_day,conso){
             }
         }
     });
+}
+
+function TrieConsos(data, days, donnes, conso){
+    let labels=Object.keys(data);
+    //trie les labels par ordre décroissant
+    labels=labels.sort(trierParDate).reverse();
+    console.log("labels");
+    console.log(labels);
+    let quantite=[];
+    let prix=[];
+    let day=[];
+    let date=new Date();
+    let jour=date.getDate()-days;
+    let mois=date.getMonth()+1;
+    let annee=date.getFullYear();
+    let date_jour=annee+mois+jour;
+
+    for(let label of labels){
+        //check si le jour est dans la limite du nb_day
+        //changement du format de la date de jj/mm/aaaa en aaaammjj
+        let date_split=label.split("/");
+        let date_format=date_split[2]+date_split[1]+date_split[0];
+        date_test=date_format;
+        if(date_test>date_jour){
+            if (donnes){
+                if (data[label][conso] != undefined ){
+                    quantite.push(data[label][conso]["quantité"]);
+                    prix.push(data[label][conso]["prix"]);
+                    day.push(label);
+                }
+            }
+            else{
+                if (data[label] != undefined ){
+                    quantite.push(data[label]["quantité"]);
+                    prix.push(data[label]["prix"]);
+                    day.push(label);
+                }
+            }
+            
+            
+        }
+    }
+    return [quantite, day, prix];
 }
