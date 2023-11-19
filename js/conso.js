@@ -102,7 +102,7 @@ function prix_panier(){
     //formule ptit déj : 2 snack + 1 boisson = 2conso
     //calcul du nombre de formule ptit dej dans le panier
     if (snack>=2 && boisson>=1){
-        reduc=Math.min(Math.floor(snack/2),boisson);
+        reduc=Math.min(Math.floor(snack/2),prixboissons);
     }
     return [total_conso,reduc];
 }
