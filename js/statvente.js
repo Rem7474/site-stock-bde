@@ -359,21 +359,28 @@ function TrieConsos(data, days, donnes, conso){
     let labels=Object.keys(data);
     //trie les labels par ordre décroissant
     labels=labels.sort(trierParDate).reverse();
-    console.log("labels");
-    console.log(labels);
     let quantite=[];
     let prix=[];
     let day=[];
     let date=new Date();
     let jour=date.getDate()-days;
+    if (jour<10){
+        jour="0"+jour;
+    }
     let mois=date.getMonth()+1;
     let annee=date.getFullYear();
-    let date_jour=annee+mois+jour;
+    let date_jour="".concat(annee,mois,jour);
 
     for(let label of labels){
         //check si le jour est dans la limite du nb_day
         //changement du format de la date de jj/mm/aaaa en aaaammjj
         let date_split=label.split("/");
+        if (date_split[0]<10){
+            date_split[0]="0"+date_split[0];
+        }
+        if (date_split[1]<10){
+            date_split[1]="0"+date_split[1];
+        }
         let date_format=date_split[2]+date_split[1]+date_split[0];
         date_test=date_format;
         if(date_test>date_jour){
