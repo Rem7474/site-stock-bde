@@ -476,3 +476,9 @@ img{
   font-weight: bold;
   padding: 5px;
 }
+::placeholder {
+  color: black;
+  /*bold*/
+  font-weight: bold;
+  font-size: larger;
+}
