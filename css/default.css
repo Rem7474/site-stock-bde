@@ -273,6 +273,7 @@ img{
   height: 125px;
   color: transparent;
   transition: all .2s ease-in-out;
+  background-position: center;
 }
 
 .produit button:hover{
@@ -372,6 +373,9 @@ img{
 }
 .cafe{
   background-image: url("../img/cafe.png");
+}
+.bijoucaramel{
+  background-image: url("../img/bijou_caramel.png");
 }
 .produit button:disabled{
   filter: brightness(50%);
