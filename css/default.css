@@ -377,6 +377,9 @@ img{
 .bijoucaramel{
   background-image: url("../img/bijou_caramel.png");
 }
+#snacks #bijoucaramel{
+  width:10%;
+}
 .produit button:disabled{
   filter: brightness(50%);
   cursor: not-allowed;

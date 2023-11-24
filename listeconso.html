@@ -207,29 +207,29 @@
                 </button>
             </div>
             <div class="maj_stock">
-                <button name="Bijou Caramel" type="button" id="bijou_caramel" value="1" class="clickage conso bijoucaramel">
+                <button name="Bijou Caramel" type="button" id="stock_bijoucaramel" value="1" class="clickage conso bijoucaramel">
                     <span class="badge_stock" id="stock_bijoucaramel">0</span>
                 </button>
         </div>
     </div>
 </div>
+</div>
 <div>
-<form id="form_stock" class="addconso">
-    <div class="formulaire">
-    <label for="id_conso">ID :</label>
-    <input type="text" name="id_conso" id="id_conso" placeholder="" disabled>
-    <label for="cost_conso">Prix de Vente :</label>
-    <input type="number" name="cost_conso" id="cost_conso" placeholder="" disabled>
-    <label for="prix_achat">Prix achat unitaire TTC</label>
-    <input type="text" name="prix_achat" id="prix_achat" required>
-    <label for="stock">Stock de la conso</label>
-    <input type="number" name="stock" id="stock" required>
-</div>
-    <button type="submit" id="add" class="button_add">Ajouter la consommation</button>
-
-</form>
-</div>
-</div>
+    <form id="form_stock" class="addconso">
+        <div class="formulaire">
+        <label for="id_conso">ID :</label>
+        <input type="text" name="id_conso" id="id_conso" placeholder="" disabled>
+        <label for="cost_conso">Prix de Vente :</label>
+        <input type="number" name="cost_conso" id="cost_conso" placeholder="" disabled>
+        <label for="prix_achat">Prix achat unitaire TTC</label>
+        <input type="text" name="prix_achat" id="prix_achat" required>
+        <label for="stock">Stock de la conso</label>
+        <input type="number" name="stock" id="stock" required>
+    </div>
+        <button type="submit" id="add" class="button_add">Ajouter la consommation</button>
+    
+    </form>
+    </div>
 <!--Affichage de toutes les consos qui sont disponible au BDE R&T-->
 <div id="tableau"></div>
 </body>
