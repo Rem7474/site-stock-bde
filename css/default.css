@@ -371,11 +371,17 @@ img{
 .chips{
   background-image: url("../img/chips.png");
 }
+#snacks #chips{
+  width: 100px;
+}
 .cafe{
   background-image: url("../img/cafe.png");
 }
 .bijoucaramel{
   background-image: url("../img/bijou_caramel.png");
+}
+#snacks #bijoucaramel{
+  width: 150px;
 }
 .produit button:disabled{
   filter: brightness(50%);
