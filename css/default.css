@@ -237,7 +237,7 @@ tr:last-of-type{
   right: 20px;
 }
 
-.table tr, .formulaire label, .formulaire input{
+.table tr, .formulaire label, .formulaire input, .checkout label{
   color : white;
   font-size: larger;
 }
@@ -489,7 +489,7 @@ img{
   font-weight: bold;
   padding: 5px;
 }
-::placeholder {
+#username{
   color: black;
   /*bold*/
   font-weight: bold;
