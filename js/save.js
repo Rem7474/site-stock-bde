@@ -38,3 +38,13 @@ function import_localStorage(event) {
 
     lecteur.readAsText(fichier);
 }
+
+function clear_stock_localStorage() {
+    //supprime les ventes du localStorage, donc touts sauf les utilisateurs
+    let keys = Object.keys(localStorage);
+    for (let key of keys) {
+        if (key != "users") {
+            localStorage.removeItem(key);
+        }
+    }
+}
