@@ -389,6 +389,9 @@ img{
 .bijoucaramel{
   background-image: url("../img/bijou_caramel.png");
 }
+.bijouchocolait{
+  background-image: url("../img/madeleine.png");
+}
 #snacks #bijoucaramel{
   width: 150px;
 }
