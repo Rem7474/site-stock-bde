@@ -392,7 +392,7 @@ img{
 .bijouchocolait{
   background-image: url("../img/madeleine.png");
 }
-#snacks #bijoucaramel{
+#snacks #bijoucaramel, #snacks #bijouchocolait{
   width: 150px;
 }
 .produit button:disabled{
