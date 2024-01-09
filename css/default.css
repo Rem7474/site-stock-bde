@@ -383,6 +383,15 @@ img{
 .twix{
   background-image: url("../img/twix.png");
 }
+.bounty{
+  background-image: url("../img/bounty.png");
+}
+.pringles_onion{
+  background-image: url("../img/pringles_onion.png");
+}
+.pringles_hot{
+  background-image: url("../img/pringles_hot.png");
+}
 .chips{
   background-image: url("../img/chips.png");
 }
