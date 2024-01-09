@@ -283,6 +283,9 @@ img{
   transition: all .2s ease-in-out;
 }
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.pepsi{
+  background-image: url("../img/pepsi.png");
+}
 .coca{
   background-image: url("../img/coke.png");
 }
