@@ -407,6 +407,9 @@ img{
 .chupa_chups{
   background-image: url("../img/chupa.png");
 }
+.granola{
+  background-image: url("../img/granola.png");
+}
 .maj_stock .carre, .buttons .carre{
   width: 100px !important;
 }
