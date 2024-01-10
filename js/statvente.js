@@ -368,6 +368,9 @@ function TrieConsos(data, days, donnes, conso){
         jour="0"+jour;
     }
     let mois=date.getMonth()+1;
+    if (mois<10){
+        mois="0"+mois;
+    }
     let annee=date.getFullYear();
     let date_jour="".concat(annee,mois,jour);
 
