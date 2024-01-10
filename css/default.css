@@ -264,7 +264,7 @@ img{
   margin-inline: 10px;
 }
 
-#boissons_1_conso button, #boisson_2_conso button, #snacks button{
+#boissons_1_conso button, #boisson_2_conso button, #snacks button,#snacks_2_conso button, #demi_conso button{
   background-color: transparent;
   border-style: none;
   background-repeat: no-repeat;
@@ -395,9 +395,6 @@ img{
 .chips{
   background-image: url("../img/chips.png");
 }
-#snacks #chips{
-  width: 100px;
-}
 .cafe{
   background-image: url("../img/cafe.png");
 }
@@ -407,8 +404,11 @@ img{
 .bijouchocolait{
   background-image: url("../img/madeleine.png");
 }
-#snacks #bijoucaramel, #snacks #bijouchocolait{
-  width: 150px;
+.chupa_chups{
+  background-image: url("../img/chupa.png");
+}
+.maj_stock .carre, .buttons .carre{
+  width: 100px !important;
 }
 .produit button:disabled{
   filter: brightness(50%);
