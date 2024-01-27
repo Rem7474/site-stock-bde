@@ -25,6 +25,7 @@ function update_windows(){
         bouton.addEventListener("click",update_stock_produit);
     }
     document.getElementById("form_stock").addEventListener("submit",save_stock);
+    document.getElementById("delete_stock").addEventListener("click",delete_local_storage);
 }
 function update_stock_produit(event){
     document.getElementById("id_conso").value=event.currentTarget.id;
@@ -87,4 +88,33 @@ function get_stock(id_conso){
         stock_conso = stock[id_conso]["quantité"];
     }
     return stock_conso;
+}
+function delete_local_storage(){
+    delete_historique_conso_vendu();
+    delete_stock();
+    display_stock();
+}
+function delete_stock(){
+    //dans le stock_courses on supprime uniquement les quantités
+    //{"bijoucaramel":{"quantité":20,"prix":1,"prix_achat":0.4},"maido":{"quantité":20,"prix":1,"prix_achat":0.3},"cafe":{"quantité":10,"prix":0.5,"prix_achat":0},"pepsi":{"quantité":10,"prix":1,"prix_achat":0},"redbull":{"quantité":10,"prix":2,"prix_achat":0},"lion":{"quantité":10,"prix":1,"prix_achat":0},"pringles_onion":{"quantité":10,"prix":1,"prix_achat":0}}
+    let stock = localStorage.getItem("stock_courses");
+    if (stock==null){
+        stock = "{}";
+    }
+    stock = JSON.parse(stock);
+    let keys = Object.keys(stock);
+    for (let key of keys){
+        stock[key]["quantité"]=0;
+    }
+    localStorage.setItem("stock_courses",JSON.stringify(stock));
+
+}
+function delete_historique_conso_vendu(){
+    //supprime tout les clé sauf "stock_courses" et "users"
+    let keys = Object.keys(localStorage);
+    for (let key of keys){
+        if (key!="stock_courses" && key!="users"){
+            localStorage.removeItem(key);
+        }
+    }
 }
