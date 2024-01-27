@@ -392,6 +392,12 @@ img{
 .pringles_hot{
   background-image: url("../img/pringles_hot.png");
 }
+.pringles_original{
+  background-image: url("../img/pringles_original.png");
+}
+.pringles_paprika{
+  background-image: url("../img/pringles_paprika.png");
+}
 .chips{
   background-image: url("../img/chips.png");
 }
