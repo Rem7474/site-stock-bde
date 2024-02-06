@@ -1,5 +1,6 @@
 //AUTHOR: REMY CUVELIER
 //DATE: 2023.10.27
+//DERNIERE MAJ : 2024.02.06 : ajout de la fonction display_historique
 //PROJECT: STOCK BDE
 
 //ip du lecteur RFID
@@ -29,6 +30,8 @@ function rfid(uid){
         if (users[uid]!=undefined){
             document.getElementById("username").value=users[uid]["nom"];
             document.getElementById("nb_conso").value=users[uid]["nb_conso"];
+            //appelle de la fonction pour afficher l'historique des consos de l'utilisateur
+            display_historique(uid);
         }
         else{
             reset=2;
@@ -86,4 +89,69 @@ function save_user(event){
     document.getElementById("username").value="";
     document.getElementById("uid").value="";
     document.getElementById("nb_conso").value="";
+}
+function display_historique(uid){
+    let affichage=document.getElementById("conso_history");
+    //récupère toute les clés du local storage
+    let keys=Object.keys(localStorage);
+    //tout parcourir pour trouver dans lesquel la valeur de l'uid est stockée (clé : user_id) : structure clé:{user_id:uid,"consos":{"up_mojito":{"quantité":1,"nbconso":1,"nom":"7Up Mojito"}},"prix":1}
+    let historique=[];
+    for (let key of keys){
+        //si la clé est un nombre
+        if (!isNaN(key)){
+            let value=localStorage.getItem(key);
+            value=JSON.parse(value);
+            if (value["user_id"]==uid){
+                historique.push(value);
+            }
+        }
+    }
+    //affiche l'historique
+    //dans value : {"jour":"6/2/2024","heure":"21:7","consos":{"up_mojito":{"quantité":1,"nbconso":1,"nom":"7Up Mojito"}},"prix":1}
+    affichage.innerHTML="";
+    //création du tableau dans le html
+    tableau=document.createElement("table");
+    //entête du tableau
+    let ligne=document.createElement("tr");
+    let th=document.createElement("th");
+    th.innerHTML="Date et heure d'achat";
+    ligne.appendChild(th);
+    th=document.createElement("th");
+    th.innerHTML="Consos acheté et quantité";
+    ligne.appendChild(th);
+    th=document.createElement("th");
+    th.innerHTML="Prix Total";
+    ligne.appendChild(th);
+    tableau.appendChild(ligne);
+    for (let value of historique){
+        let date=value["jour"]+" "+value["heure"];
+        let consos=value["consos"];
+        //récupère les clé de consos
+        let keys=Object.keys(consos);
+        let noms=[];
+        let quantites=[];
+        for (let key of keys){
+            //récupère le nom de la conso et la quantité
+            noms.push(consos[key]["nom"]);
+            quantites.push(consos[key]["quantité"]);
+        }
+        let prix=value["prix"];
+        let ligne=document.createElement("tr");
+        let td=document.createElement("td");
+        td.innerHTML=date;
+        ligne.appendChild(td);
+        td=document.createElement("td");
+        //affichage du nom et de la quantité des consos
+        let consos_string="";
+        for (let i=0;i<noms.length;i++){
+            consos_string+=noms[i]+" : "+quantites[i]+"<br>";
+        }
+        td.innerHTML=consos_string;
+        ligne.appendChild(td);
+        td=document.createElement("td");
+        td.innerHTML=prix;
+        ligne.appendChild(td);
+        tableau.appendChild(ligne);
+    }
+    affichage.appendChild(tableau);
 }

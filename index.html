@@ -32,19 +32,19 @@
             <div id="boissons_1_conso">
                 <h2>Boissons à 1 conso</h2>
                 <div class="buttons">
-                    <button name="Pepsi" type="button" id="pepsi" value="1" class="clickage conso pepsi">Pepsi</button>
-                    <button name="Coca-Cola" type="button" id="coca" value="1" class="clickage conso coca">Coca-Cola</button>
-                    <button name="Coca-Cola Cherry" type="button" id="coca_cherry" value="1" class="clickage conso cherry">Coca-Cola Cherry</button>
-                    <button name="Lipton Ice-Tea" type="button" id="Lipton" value="1" class="clickage conso icetea">Lipton</button>
-                    <button name="Ice-Tea Framboise" type="button" id="lipton_framboise" value="1" class="clickage conso lipton_framboise">Lipton Framboise</button>
-                    <button name="FuzeTea" type="button" id="Fuzetea" value="1" class="clickage conso fuze">FuzeTea</button>
-                    <button name="Oasis Pomme Cassis Framboise" type="button" id="opcf" value="1" class="clickage conso opcf">Oasis Pomme Cassis Framboise</button>
-                    <button name="Schweppes Agrumes" type="button" id="schweppes" value="1" class="clickage conso schweppes">Schweppes Agrumes</button>
-                    <button name="Orangina" type="button" id="orangina" value="1" class="clickage conso orangina">Orangina</button>
-                    <button name="Fanta Citron" type="button" id="fanta_citron" value="1" class="clickage conso fanta_citron">Fanta Citron</button>
-                    <button name="Mirinda Fraise" type="button" id="mirinda_f" value="1" class="clickage conso mirindaf">Mirinda Fraise</button>
-                    <button name="Hawai" type="button" id="hawai" value="1" class="clickage conso hawai">Hawai</button>
-                    <button name="7Up Mojito" type="button" id="up_mojito" value="1" class="clickage conso up_mojito">7Up Mojito</button>
+                    <button name="Pepsi" type="button" id="pepsi" value="1" class="clickage conso pepsi" data-formule="boisson_ptit_dej">Pepsi</button>
+                    <button name="Coca-Cola" type="button" id="coca" value="1" class="clickage conso coca" data-formule="boisson_ptit_dej">Coca-Cola</button>
+                    <button name="Coca-Cola Cherry" type="button" id="coca_cherry" value="1" class="clickage conso cherry" data-formule="boisson_ptit_dej">Coca-Cola Cherry</button>
+                    <button name="Lipton Ice-Tea" type="button" id="Lipton" value="1" class="clickage conso icetea" data-formule="boisson_ptit_dej">Lipton</button>
+                    <button name="Ice-Tea Framboise" type="button" id="lipton_framboise" value="1" class="clickage conso lipton_framboise" data-formule="boisson_ptit_dej">Lipton Framboise</button>
+                    <button name="FuzeTea" type="button" id="Fuzetea" value="1" class="clickage conso fuze" data-formule="boisson_ptit_dej">FuzeTea</button>
+                    <button name="Oasis Pomme Cassis Framboise" type="button" id="opcf" value="1" class="clickage conso opcf" data-formule="boisson_ptit_dej">Oasis Pomme Cassis Framboise</button>
+                    <button name="Schweppes Agrumes" type="button" id="schweppes" value="1" class="clickage conso schweppes" data-formule="boisson_ptit_dej">Schweppes Agrumes</button>
+                    <button name="Orangina" type="button" id="orangina" value="1" class="clickage conso orangina" data-formule="boisson_ptit_dej">Orangina</button>
+                    <button name="Fanta Citron" type="button" id="fanta_citron" value="1" class="clickage conso fanta_citron" data-formule="boisson_ptit_dej">Fanta Citron</button>
+                    <button name="Mirinda Fraise" type="button" id="mirinda_f" value="1" class="clickage conso mirindaf" data-formule="boisson_ptit_dej">Mirinda Fraise</button>
+                    <button name="Hawai" type="button" id="hawai" value="1" class="clickage conso hawai" data-formule="boisson_ptit_dej">Hawai</button>
+                    <button name="7Up Mojito" type="button" id="up_mojito" value="1" class="clickage conso up_mojito" data-formule="boisson_ptit_dej">7Up Mojito</button>
                     <button name="Cacolac" type="button" id="cacolac" value="1" class="clickage conso cacolac" data-formule="boisson_ptit_dej">Cacolac</button>
                     <button name="Minute Maid" type="button" id="maid" value="1" class="clickage conso maid" data-formule="boisson_ptit_dej">Minute Maid</button>
                     <button name="Minute Maid Orange" type="button" id="maido" value="1" class="clickage conso maido" data-formule="boisson_ptit_dej">Minute Maid Orange</button>
@@ -99,7 +99,11 @@
             <div id=checkout class="checkout">
                 <h3 id=total></h3>
                 <div id="tableau"></div>
-                <button type=button id="uid_rfid" class="save">Lecture Carte</button>
+                <div class="button_panier">
+                    <button type=button id="uid_rfid" class="save">Lecture Carte</button>
+                    <!--Champ input pour modifier le total du panier-->
+                    <input type="number" id="total_panier" class="input_prix" name="total_panier" placeholder="Total">
+                </div>
                 <label for="username">Nom :</label>
                 <input type="text" name="username" id="username" placeholder="" disabled>
                 <div class="button_panier">

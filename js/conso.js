@@ -83,6 +83,11 @@ function add_panier(event){
 function prix_panier(){
     let total_conso=0;
     //calcul du prix du panier temporaire, et déduit les reductions appliquables
+    let prix_manuel=document.getElementById("total_panier").value;
+    //test si la valeur est un nombre
+    if (!isNaN((prix_manuel)) && (prix_manuel!="")){
+        return [parseFloat(prix_manuel),0];
+    }
     //définition des variables
     let boisson=0;
     let snack=0;

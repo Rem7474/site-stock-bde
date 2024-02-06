@@ -299,7 +299,7 @@ function update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_acha
     let marge_total=prix_vente-prix_achat;
     let prix_vendu=get_prix_vendu();
     let prix_achat_vendu=prix_achat-prix_stock_restant_achat;
-    let pourcentage_prix_vendu=(prix_vendu/prix_vente*100).toFixed(2);
+    let pourcentage_prix_vendu=(100-(prix_stock_restant_vente/prix_vente*100)).toFixed(2);
     let pourcetage_marge=(marge_total/prix_achat*100).toFixed(2);
     let marge_actuel=prix_vendu-prix_achat_vendu;
     let texte="Prix d'achat total : "+prix_achat+"€<br>";
@@ -311,6 +311,7 @@ function update_html(prix_stock_restant_achat,prix_stock_restant_vente,prix_acha
     texte+="Prix d'achat des courses vendues : "+prix_achat_vendu.toFixed(2)+"€<br>";
     texte+="Marge actuel : "+marge_actuel.toFixed(2)+"€<br>";
     texte+="Total vendu : "+(prix_vendu).toFixed(2)+"€<br>";
+    texte+="Ventes restant : "+(prix_vente-prix_vendu).toFixed(2)+"€<br>";
     texte+="Pourcentage vendu : "+pourcentage_prix_vendu+"%<br>";
     document.getElementById("prix").innerHTML=texte;
 }

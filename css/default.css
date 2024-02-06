@@ -161,6 +161,15 @@ nav ul li a{
   justify-content: space-between;
   display: flex;
 }
+.input_prix{
+  border-radius: 10px;
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  background-color: #f2d3b4;
+  color: black;
+  font-size: larger;
+}
 .anim3{
   transform: scale(1.1);
   font-size: larger;
