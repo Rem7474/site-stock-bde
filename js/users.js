@@ -18,6 +18,7 @@ function rfid(uid){
     let uid_form=document.getElementById("uid");
     let username_form=document.getElementById("username");
     let nb_conso_form=document.getElementById("nb_conso");
+    let affichage=document.getElementById("conso_history");
     let reset=0;
     if (uid!=null){
         document.getElementById("uid").value=uid;
@@ -45,10 +46,12 @@ function rfid(uid){
             uid_form.value="";
             username_form.value="";
             nb_conso_form.value="";
+            affichage.innerHTML="";
             break;
         case 2:
             username_form.value="";
             nb_conso_form.value="";
+            affichage.innerHTML="";
             break;
     }
 }

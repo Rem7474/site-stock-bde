@@ -205,6 +205,7 @@ function vider_panier(){
         Temp_Local_Storage={};
         document.getElementById("username").value="";
         document.getElementById("username").removeAttribute("data-uid");
+        document.getElementById("total_panier").value="";
     }, 250);
 }
 function rfid(uid){
