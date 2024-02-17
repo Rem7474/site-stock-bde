@@ -124,7 +124,7 @@ nav ul li a{
 }
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-.save, .button_add{
+.bouton_ok, .button_add{
   width: 220px;
   height: 50px;
   background-color: #0077ed;
@@ -137,7 +137,7 @@ nav ul li a{
 .button_add{
   width: auto;
 }
-.save:hover, .button_add:hover {
+.bouton_ok:hover, .button_add:hover {
   background-color: #0080ff;
   cursor: pointer;
   transform: scale(1.1);
@@ -545,4 +545,20 @@ img{
   /*bold*/
   font-weight: bold;
   font-size: larger;
+}
+.select_user{
+  cursor: pointer;
+}
+.input_text{
+  border-radius: 10px;
+  text-align: center;
+  background-color: #f2d3b4;
+  align-self: center;
+  color: black;
+  font-size: larger;
+}
+.result p{
+  font-size: larger;
+  color: white;
+  font-weight: bold;
 }

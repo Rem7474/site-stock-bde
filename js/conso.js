@@ -12,6 +12,7 @@ window.addEventListener("load",update_windows);
 document.getElementById("save").addEventListener("click",save_panier);
 document.getElementById("cancel").addEventListener("click",vider_panier);
 document.getElementById("uid_rfid").addEventListener("click",get_uid);
+document.getElementById("search_button").addEventListener("click",search_user);
 function update_windows(){
     console.log("actualisation de la page");
     
@@ -206,6 +207,8 @@ function vider_panier(){
         document.getElementById("username").value="";
         document.getElementById("username").removeAttribute("data-uid");
         document.getElementById("total_panier").value="";
+        document.getElementById("search").value="";
+        document.getElementById("result_users").innerHTML="";
     }, 250);
 }
 function rfid(uid){
@@ -248,4 +251,31 @@ function get_uid(){
         }
     }
     xhr.send();
+}
+
+function search_user(event){
+    let affichage=document.getElementById("result_users");
+    affichage.innerHTML="";
+    event.preventDefault();
+    let nom=document.getElementById("search").value;
+    let users=localStorage.getItem("users");
+    users=JSON.parse(users);
+    for (let user in users){
+        if (users[user]["nom"].toLowerCase().includes(nom.toLowerCase())){
+            let ligne=document.createElement("p");
+            ligne.innerHTML=users[user]["nom"]+" : "+users[user]["nb_conso"]+" conso";
+            ligne.setAttribute("data-uid",user);
+            ligne.addEventListener("click",select_user);
+            ligne.className="select_user";
+            affichage.appendChild(ligne);
+        }
+    }
+}
+
+function select_user(event){
+    let user=event.target.getAttribute("data-uid");
+    document.getElementById('username').value=event.target.innerHTML;
+    document.getElementById('username').setAttribute("data-uid",user);
+    document.getElementById("result_users").innerHTML="";
+    document.getElementById("search").value="";
 }

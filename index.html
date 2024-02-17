@@ -101,15 +101,21 @@
                 <h3 id=total></h3>
                 <div id="tableau"></div>
                 <div class="button_panier">
-                    <button type=button id="uid_rfid" class="save">Lecture Carte</button>
+                    <button type=button id="uid_rfid" class="bouton_ok">Lecture Carte</button>
                     <!--Champ input pour modifier le total du panier-->
                     <input type="number" id="total_panier" class="input_prix" name="total_panier" placeholder="Total">
                 </div>
+                <!--div pour rechercher un utilisateur avec la première lettre de son prénom et de le sélectionner-->
+                <div id="search_user" class="search_user">
+                    <input type="text" id="search" class="input_text" name="search" placeholder="Rechercher un utilisateur">
+                    <button type=button id="search_button" class="bouton_ok">Rechercher</button>
+                    <div id="result_users" class="result"></div>
+                </div>
                 <label for="username">Nom :</label>
-                <input type="text" name="username" id="username" placeholder="" disabled>
+                <input type="text" name="username" class="input_text" id="username" placeholder="" disabled>
                 <div class="button_panier">
                     <button type=button id="cancel" class="cancel">Vider</button>
-                    <button type=button id="save" class="save">Valider le panier</button>
+                    <button type=button id="save" class="bouton_ok">Valider le panier</button>
                 </div>
             </div>
         </div>
