@@ -10,6 +10,8 @@ var ip_rfid_reader = "http://bde.local:8080/api/uid";
 document.getElementById("uid_rfid").addEventListener("click",get_uid);
 
 document.getElementById("form_user").addEventListener("submit",save_user);
+
+document.getElementById("list_users").addEventListener("click",utilisateurs);
 //fonctions de conso.js
 function rfid(uid){
     console.log("rfid");
@@ -76,6 +78,8 @@ function get_uid(){
 }
 
 function save_user(event){
+    let affichage=document.getElementById("users_list");
+    affichage.innerHTML="";
     event.preventDefault();
     let nom=document.getElementById("username").value;
     let uid=document.getElementById("uid").value;
@@ -92,6 +96,7 @@ function save_user(event){
     document.getElementById("username").value="";
     document.getElementById("uid").value="";
     document.getElementById("nb_conso").value="";
+    document.getElementById("conso_history").innerHTML="";
 }
 function display_historique(uid){
     let affichage=document.getElementById("conso_history");
@@ -157,4 +162,64 @@ function display_historique(uid){
         tableau.appendChild(ligne);
     }
     affichage.appendChild(tableau);
+}
+
+function utilisateurs(){
+    let users=localStorage.getItem("users");
+    let affichage=document.getElementById("users_list");
+    affichage.innerHTML="";
+    if (users!=null){
+        users=JSON.parse(users);
+        let keys=Object.keys(users);
+        affichage.innerHTML="";
+        for (let key of keys){
+            let ligne=document.createElement("p");
+            ligne.innerHTML=key+" : "+users[key]["nom"]+" : "+users[key]["nb_conso"]+" consos";
+            //ajout d'un bouton pour supprimer l'utilisateur
+            let bouton=document.createElement("button");
+            bouton.innerHTML="Supprimer";
+            bouton.addEventListener("click",delete_utilisateur);
+            bouton.id=key;
+            ligne.appendChild(bouton);
+            //bouton pour modifier l'utilisateur
+            let bouton_modif=document.createElement("button");
+            bouton_modif.innerHTML="Modifier";
+            bouton_modif.id=key;
+            bouton_modif.addEventListener("click",affiche_users);
+            ligne.appendChild(bouton_modif);
+            affichage.appendChild(ligne);
+        }
+    }
+    else{
+        affichage.innerHTML="Aucun utilisateur enregistré";
+    }
+}
+
+function delete_utilisateur(event){
+    let uid=event.target.id;
+    let users=localStorage.getItem("users");
+    if (users!=null && JSON.parse(users)[uid]!=undefined){
+        users=JSON.parse(users);
+        delete users[uid];
+        localStorage.setItem("users",JSON.stringify(users));
+        utilisateurs();
+    }
+    else{
+        alert("Utilisateur introuvable");
+    }
+}
+
+function affiche_users(event){
+    let uid=event.target.id;
+    let users=localStorage.getItem("users");
+    if (users!=null && JSON.parse(users)[uid]!=undefined){
+        users=JSON.parse(users);
+        document.getElementById("uid").value=uid;
+        document.getElementById("username").value=users[uid]["nom"];
+        document.getElementById("nb_conso").value=users[uid]["nb_conso"];
+        display_historique(uid);
+    }
+    else{
+        alert("Utilisateur introuvable");
+    }
 }
