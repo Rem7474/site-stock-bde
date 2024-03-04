@@ -12,7 +12,7 @@ window.addEventListener("load",update_windows);
 document.getElementById("save").addEventListener("click",save_panier);
 document.getElementById("cancel").addEventListener("click",vider_panier);
 document.getElementById("uid_rfid").addEventListener("click",get_uid);
-document.getElementById("search_button").addEventListener("click",search_user);
+document.getElementById("search_form").addEventListener("submit",search_user);
 function update_windows(){
     console.log("actualisation de la page");
     
@@ -254,9 +254,9 @@ function get_uid(){
 }
 
 function search_user(event){
+    event.preventDefault();
     let affichage=document.getElementById("result_users");
     affichage.innerHTML="";
-    event.preventDefault();
     let nom=document.getElementById("search").value;
     let users=localStorage.getItem("users");
     users=JSON.parse(users);

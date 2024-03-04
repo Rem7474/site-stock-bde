@@ -107,8 +107,10 @@
                 </div>
                 <!--div pour rechercher un utilisateur avec la première lettre de son prénom et de le sélectionner-->
                 <div id="search_user" class="search_user">
-                    <input type="text" id="search" class="input_text" name="search" placeholder="Rechercher un utilisateur">
-                    <button type=button id="search_button" class="bouton_ok">Rechercher</button>
+                    <form id="search_form">
+                        <input type="text" id="search" class="input_text" name="search" placeholder="Rechercher un utilisateur">
+                        <input type=submit class="bouton_ok" value="Rechercher">
+                    </form>
                     <div id="result_users" class="result"></div>
                 </div>
                 <label for="username">Nom :</label>
