@@ -12,6 +12,10 @@ document.getElementById("uid_rfid").addEventListener("click",get_uid);
 document.getElementById("form_user").addEventListener("submit",save_user);
 
 document.getElementById("list_users").addEventListener("click",utilisateurs);
+
+document.getElementById("search_user").addEventListener("click",search_user);
+
+document.getElementById("cancel").addEventListener("click", reset_form)
 //fonctions de conso.js
 function rfid(uid){
     console.log("rfid");
@@ -168,27 +172,15 @@ function utilisateurs(){
     let users=localStorage.getItem("users");
     let affichage=document.getElementById("users_list");
     affichage.innerHTML="";
+    tableau=createTable();
     if (users!=null){
         users=JSON.parse(users);
         let keys=Object.keys(users);
         affichage.innerHTML="";
         for (let key of keys){
-            let ligne=document.createElement("p");
-            ligne.innerHTML=key+" : "+users[key]["nom"]+" : "+users[key]["nb_conso"]+" consos";
-            //ajout d'un bouton pour supprimer l'utilisateur
-            let bouton=document.createElement("button");
-            bouton.innerHTML="Supprimer";
-            bouton.addEventListener("click",delete_utilisateur);
-            bouton.id=key;
-            ligne.appendChild(bouton);
-            //bouton pour modifier l'utilisateur
-            let bouton_modif=document.createElement("button");
-            bouton_modif.innerHTML="Modifier";
-            bouton_modif.id=key;
-            bouton_modif.addEventListener("click",affiche_users);
-            ligne.appendChild(bouton_modif);
-            affichage.appendChild(ligne);
+            display_utilisateur(tableau,key,users[key])
         }
+        affichage.appendChild(tableau);
     }
     else{
         affichage.innerHTML="Aucun utilisateur enregistré";
@@ -222,4 +214,76 @@ function affiche_users(event){
     else{
         alert("Utilisateur introuvable");
     }
+}
+
+function search_user(){
+    let affichage=document.getElementById("users_list");
+    affichage.innerHTML="";
+    tableau=createTable();
+    let nom=document.getElementById("username").value;
+    let users=localStorage.getItem("users");
+    users=JSON.parse(users);
+    for (let user in users){
+        if (users[user]["nom"].toLowerCase().includes(nom.toLowerCase())){
+            display_utilisateur(tableau,user,users[user])
+
+        }
+    }
+    affichage.appendChild(tableau);
+}
+
+function display_utilisateur(tableau,id,user){
+    let ligne=document.createElement("tr");
+    let td=document.createElement("td");
+    td.innerHTML=id;
+    ligne.appendChild(td);
+    td=document.createElement("td");
+    td.innerHTML=user["nom"];
+    ligne.appendChild(td);
+    td=document.createElement("td");
+    td.innerHTML=user["nb_conso"];
+    ligne.appendChild(td);
+
+    td=document.createElement("td");
+    //ajout d'un bouton pour supprimer l'utilisateur
+    let bouton=document.createElement("button");
+    bouton.innerHTML="Supprimer";
+    bouton.addEventListener("click",delete_utilisateur);
+    bouton.id=id;
+    td.appendChild(bouton);
+    //bouton pour modifier l'utilisateur
+    let bouton_modif=document.createElement("button");
+    bouton_modif.innerHTML="Modifier";
+    bouton_modif.id=id;
+    bouton_modif.addEventListener("click",affiche_users);
+    td.appendChild(bouton_modif);
+    ligne.appendChild(td);
+    tableau.appendChild(ligne);
+}
+
+function createTable(){
+    tableau=document.createElement("table");
+    //entête du tableau
+    let ligne=document.createElement("tr");
+    let th=document.createElement("th");
+    th.innerHTML="ID carte";
+    ligne.appendChild(th);
+    th=document.createElement("th");
+    th.innerHTML="Nom d'utilisateur";
+    ligne.appendChild(th);
+    th=document.createElement("th");
+    th.innerHTML="Consos restantes";
+    ligne.appendChild(th);
+    th=document.createElement("th");
+    th.innerHTML="Actions";
+    ligne.appendChild(th);
+    tableau.appendChild(ligne);
+    return tableau;
+}
+
+function reset_form(){
+    document.getElementById("username").value="";
+    document.getElementById("uid").value="";
+    document.getElementById("nb_conso").value="";
+    document.getElementById("conso_history").innerHTML="";
 }
